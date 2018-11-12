@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28010.2048
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OWBCS", "OWBCS\OWBCS.csproj", "{EDD0810C-6AA1-4D52-9146-368DF87A0BB2}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EDD0810C-6AA1-4D52-9146-368DF87A0BB2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EDD0810C-6AA1-4D52-9146-368DF87A0BB2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EDD0810C-6AA1-4D52-9146-368DF87A0BB2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EDD0810C-6AA1-4D52-9146-368DF87A0BB2}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8A391824-7C22-48F5-9CAA-E2059954DD85}
+	EndGlobalSection
+EndGlobal
