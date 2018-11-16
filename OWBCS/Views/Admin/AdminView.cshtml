@@ -1,0 +1,285 @@
+﻿@model OWBCS.Admin
+
+@{
+
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>View</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css" />
+    <link href="~/Content/themes/base/jquery-ui.min.css" rel="stylesheet" />
+</head>
+<body>
+    @using (Html.BeginForm("AdminAdd", "Admin", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        <div class="container">
+            <div class="modal fade" id="AddAdminModal" role="dialog">
+                <div class="modal-dialogs">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        </div>
+                        <div class="modal-body">
+                            <br />
+                            <div class="row">
+                                @Html.LabelFor(model => model.Fname, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-lg-12">
+                                    @Html.EditorFor(model => model.Fname, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Fname, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <br />
+                            <div class="row">
+                                @Html.LabelFor(model => model.Mname, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-lg-12">
+                                    @Html.EditorFor(model => model.Mname, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Mname, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <br />
+                            <div class="row">
+                                @Html.LabelFor(model => model.Lname, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-lg-12">
+                                    @Html.EditorFor(model => model.Lname, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Lname, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <br />
+                            <div class="row">
+                                @Html.LabelFor(model => model.Bdate, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-lg-12">
+                                    @Html.EditorFor(model => model.Bdate, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Bdate, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <br />
+                            <div class="row">
+                                @Html.LabelFor(model => model.Position, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-lg-12">
+                                    @Html.DropDownListFor(model => model.Position, new List<SelectListItem>
+                                        {
+                                      new SelectListItem() {Text = "Accountant", Value="Accountant"},
+                                      new SelectListItem() {Text = "Cashier", Value="Cashier"}
+
+                                   }, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.Position, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <br />
+                            <div class="row">
+                                @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-lg-12">
+                                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-success" id="btnAdd" name="btnAdd" onclick="Insert()">Add Employee</button>
+                            <button type="button" class="btn btn-danger" id="btnClose" name="btnClose" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    @using (Html.BeginForm("AdminEdit", "Admin", FormMethod.Post))
+    {
+        <div class="container">
+            <div class="modal fade" id="updateModal" role="dialog">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        </div>
+                        <div class="modal-body">
+                            @Html.EditorFor(model => model.Id, new { htmlAttributes = new { @class = "form-control", @id = "txtId", @name = "txtId", @style = "display:none" } })
+                            <div class="row">
+                                @Html.LabelFor(model => model.Fname, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-lg-12">
+                                    @Html.EditorFor(model => model.Fname, new { htmlAttributes = new { @class = "form-control", @id = "txtFname", @name = "txtFname" } })
+                                    @Html.ValidationMessageFor(model => model.Fname, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <br />
+                            <div class="row">
+                                @Html.LabelFor(model => model.Mname, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-lg-12">
+                                    @Html.EditorFor(model => model.Mname, new { htmlAttributes = new { @class = "form-control", @id = "txtMname", @name = "txtMname" } })
+                                    @Html.ValidationMessageFor(model => model.Mname, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <br />
+                            <div class="row">
+                                @Html.LabelFor(model => model.Lname, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-lg-12">
+                                    @Html.EditorFor(model => model.Lname, new { htmlAttributes = new { @class = "form-control", @id = "txtLname", @name = "txtLname" } })
+                                    @Html.ValidationMessageFor(model => model.Lname, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <br />
+                            <div class="row">
+                                @Html.LabelFor(model => model.Bdate, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-lg-12">
+                                    @Html.EditorFor(model => model.Bdate, new { htmlAttributes = new { @class = "form-control", @id = "txtBdate", @name = "txtBdate" } })
+                                    @Html.ValidationMessageFor(model => model.Bdate, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <br />
+                            <div class="row">
+                                @Html.LabelFor(model => model.Position, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-lg-12">
+                                    @Html.DropDownListFor(model => model.Position, new List<SelectListItem>
+                                        {
+                                      new SelectListItem() {Text = "Accountant", Value="Accountant"},
+                                      new SelectListItem() {Text = "Cashier", Value="Cashier"}
+
+                                   }, new { @class = "form-control", @id = "cboPosition", @name = "cboPosition" })
+                                    @Html.ValidationMessageFor(model => model.Position, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <br />
+                            <div class="row">
+                                @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-lg-12">
+                                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", @id = "txtEmail", @name = "txtEmail" } })
+                                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-success" id="btnUpdate" name="btnUpdate">Update</button>
+                            <button type="button" class="btn btn-danger" id="btnClose" name="btnClose" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    <div class="container">
+        <div class="table-responsive">
+            <table class="table table-striped" id="adminData">
+                <thead>
+                    <tr>
+                        <th>
+                            First Name
+                        </th>
+                        <th>
+                            Middle Name
+                        </th>
+                        <th>
+                            Last name
+                        </th>
+                        <th>
+                            Birthday
+                        </th>
+
+                        <th>
+                            Email
+                        </th>
+                        <th>Position</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+        <button type="button" id="addbtn" class="btn btn-success">
+            Add Employee
+        </button>
+    </div>
+
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
+    <script>
+            $(document).ready(function () {
+
+              var mess=@Session["status"];
+            var table = $('#adminData').DataTable({
+                "ajax": {
+                    "url": '/Admin/GetAdmin',
+                    "type": "GET",
+                    "datatype": "json",
+                },
+                "columns": [
+                    { "data": "Fname", "autowidth": true },
+                    { "data": "Mname", "autowidth": true },
+                    { "data": "Lname", "autowidth": true },
+                    { "data": "Bdate", render: function (data, type, announcement) { return announcement.FormattedDate }, "autowidth": true },
+                    { "data": "Email", "autowidth": true },
+                    { "data": "Position", "autowidth": true },
+                    { "data": "Id", "autowidth": true, render: function (data) { return '<button class="btn btn-primary" id="updateBtn" onclick="Updatet(' + data + ')">Update</button> <button class="btn btn-danger" id="deleteBtn" onclick="Delete(' + data + ')">Delete</button>' } }
+
+                ]
+            });
+                if (mess == 1) {
+                    document.forms[0].reset();
+                    alert("Success!");
+                }
+                else if (mess == 2) {
+                    alert("Email is already exist!");
+                }
+                else if (mess == 3) {
+                    alert("Submission Failed");
+                }
+        });
+        $('#addbtn').click(function () {
+
+            $('#AddAdminModal').modal();
+        }
+        );
+        $('#updateBtn').click(function () {
+
+            $('#updateModal').modal();
+        }
+        );
+        function Updatet(id) {
+            $.ajax({
+                type: "GET",
+                url: "/Admin/AdminEdit",
+                data: { Id: id },
+                success: function (data) {               
+                    $('#txtId').val(data.Id)                    
+                    document.getElementById('txtFname').value = data.Fname;
+                    document.getElementById('txtMname').value = data.Mname;
+                    document.getElementById('txtLname').value = data.Lname;
+                    document.getElementById('txtEmail').value = data.Email;
+                    var d = new Date(moment(data.Bdate).format('LL'));
+                    document.getElementById('txtBdate').value = d.toISOString().split('T')[0];
+                    console.log(d.toISOString().split('T')[0]);
+                    document.getElementById('cboPosition').value = data.Position;
+                }
+            });
+            $('#updateModal').modal();
+        }
+        function Delete(id) {
+
+            $.ajax({
+                type: "POST",
+                url: "/Admin/Deleted",
+                data: {Id:id},
+                success: function (data) {
+                    if (data == true) {
+                        alert('Deleted Successfully');
+                        window.location.reload();
+                        window.location.href = window.location.href + "?rnd=" + Math.random()
+                    }
+                },
+                error: function (error) {
+                    alert(error);
+                }
+            });
+
+        }
+    </script>
+</body>
+</html>
