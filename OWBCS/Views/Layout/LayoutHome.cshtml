@@ -1,0 +1,57 @@
+﻿@{ 
+    Layout = "";
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="~/Content/mdl/material.indigo-pink.min.css">
+    <script defer src="~/Content/mdl/material.min.js"></script>
+
+    <style>
+    body { background-image: url('/Content/Images/adminHomeBG.jpg'); }
+        
+    /*.demo-layout-transparent {
+            background: url("~/Content/Images/adminHomeBG.jpg") center / cover;
+        }*/
+
+            .demo-layout-transparent .mdl-layout__header,
+            .demo-layout-transparent .mdl-layout__drawer-button {
+                /* This background is dark, so we set text to white. Use 87% black instead if
+        your background is light. */
+                color: white;
+            }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div id="branding">
+                <h1><span class="highlight">RestauRate</span></h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="@Url.Action("Home","Home")">Home</a></li>
+                    <li><a href="@Url.Action("About","Home")">About Us</a></li>
+                    <li><a href="@Url.Action("Index","Home")">Login</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <div class=" container body-content">
+        @RenderBody()
+    </div>
+
+    <footer>
+        <p>RestauRate, Copyright &copy; @DateTime.Now.Year</p>
+    </footer>
+    @*@Scripts.Render("~/bundles/jquery")*@
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

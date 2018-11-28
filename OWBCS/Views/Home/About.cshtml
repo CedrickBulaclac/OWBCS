@@ -1,7 +1,108 @@
 ﻿@{
+    Layout = "/Views/Layout/LayoutHome.cshtml";
     ViewBag.Title = "About";
 }
-<h2>@ViewBag.Title.</h2>
-<h3>@ViewBag.Message</h3>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <meta name="description" content="Restaurant Rating Made More Fun">
+    <meta name="keywords" content="Eat, Enjoy, Earn">
+    <meta name="author" content="PaoloVillena">
+    <title>ReastauRate | About Us</title>
+    <link rel="stylesheet" href="~/Content/Css/StyleSheet1.css">
+</head>
 
-<p>Use this area to provide additional information.</p>
+
+<section id="main">
+    <div class="container">
+        <article id="main_col">
+            <h1 class="page_title">About Us</h1>
+            <p>
+                Duis eget tellus viverra, faucibus ligula in, euismod ante. Ut non
+                ultricies felis. Nunc metus enim, finibus elementum arcu id, tempus
+                ornare ligula. Proin sit amet posuere lacus. Nunc aliquam, risus et
+                lobortis elementum, magna odio convallis elit, vel laoreet tortor
+                libero vel sapien. Duis molestie, ligula et aliquam scelerisque,
+                purus tellus rutrum erat, eget dapibus ipsum metus sed ex. Quisque
+                rutrum pellentesque elit. Cras ut orci tincidunt, gravida eros at,
+                fermentum elit. Sed feugiat fermentum eros. Pellentesque bibendum
+                elit in risus tincidunt efficitur. Vestibulum tempor nisl urna, eu
+                tempor ipsum bibendum ut. Mauris tempus sapien eget tortor condimentum
+                viverra. Phasellus elementum semper lacinia.
+            </p>
+            <p>
+                Duis blandit dui odio, a vehicula sapien euismod et. Praesent
+                ullamcorper posuere imperdiet. Sed hendrerit tellus nec semper
+                fringilla. Etiam non diam sagittis, interdum odio sed, consectetur
+                nunc. Phasellus viverra sem tortor. In leo massa, molestie nec enim
+                quis, tempor volutpat metus. Morbi in ipsum nec lorem sodales aliquet.
+                Cras at aliquam libero, quis faucibus nunc. Vivamus eget commodo
+                ligula. Aenean id nulla quis velit iaculis blandit. Sed volutpat
+                accumsan nibh, at volutpat nulla. Mauris pellentesque, mauris sit
+                amet viverra tristique, libero tellus faucibus lorem, in eleifend
+                leo mauris sit amet mauris. Sed et ultrices felis.
+
+            </p>
+        </article>
+        <aside id="sidebar">
+            <div class="dark">
+                <h3>What We Do</h3>
+                <p>
+                    Phasellus interdum turpis a sapien iaculis, in mattis diam lacinia.
+                    Morbi ultricies efficitur feugiat. Integer finibus dignissim ante quis
+                    ornare.
+                    Ut rutrum velit in diam tempor sodales. Aenean a neque velit. Sed sit
+                    amet augue et nibh sollicitudin molestie ut ut enim. Praesent tincidunt
+                    vitae arcu vel volutpat. Morbi nec porta metus, sagittis consequat augue.
+                    Pellentesque sit amet ornare ante. Quisque eget enim ut nibh ornare
+                    pulvinar nec cursus lacus. Vivamus vitae faucibus nisl, ut commodo ex.
+                    Vivamus sodales congue dignissim. Praesent commodo vel tellus ac consectetur.
+                    Quisque rhoncus enim sed molestie ultricies. Cras quis magna vitae metus
+                    maximus interdum ut in neque. Vivamus ultrices ullamcorper magna, sit amet
+                    molestie justo tempor eu.
+                </p>
+            </div>
+        </aside>
+        <!--contact us-->
+        <aside id="contact_sidebar">
+            <div class="dark">
+                <h1>Contact Us</h1>
+                <p>Connect with us by sending us a message.</p>
+                <div class="form">
+                    <div class="top-form">
+                        <div class="inner-form">
+                            <div class="label">Full name</div>
+                            <input type="text">
+                        </div>
+                        <div class="inner-form">
+                            <div class="label">Email</div>
+                            <input type="text">
+                        </div>
+                        <div class="inner-form">
+                            <div class="label">Phone</div>
+                            <input type="text">
+                        </div>
+                    </div>
+                    <br>
+                    <div class="bottom-form">
+                        <div class="label">Your message</div>
+                        <textarea></textarea>
+                    </div>
+                </div>
+                <button type="button" class="Email_button" onclick="contact.html">Send Email</button>
+            </div>
+        </aside>
+        <aside id="sidebar_2">
+            <div class="dark">
+                <h3>How To find Us</h3>
+                <p>
+                    Phasellus interdum turpis a sapien iaculis, in mattis diam lacinia. Morbi ultricies efficitur feugiat. Integer finibus dignissim ante quis ornare.
+                </p>
+            </div>
+        </aside>
+    </div>
+</section>
+
+</html>
