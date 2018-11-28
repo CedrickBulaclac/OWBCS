@@ -315,126 +315,6 @@
         </div>
     </div>
 
-    @if (ViewBag.DeleteStatus != null)
-    {
-        if (ViewBag.DeleteStatus == true)
-        {
-
-            <script type="text/javascript">
-                $(document).ready(function () {
-
-                    $('#asuccess').show('fade');
-
-                    setTimeout(function () {
-                        $('#asuccess').hide('fade');
-                    }, 2000);
-                });
-            </script>
-        }
-
-        else
-        {
-
-            <script type="text/javascript">
-                $(document).ready(function () {
-
-                    $('#aerror').show('fade');
-
-                    setTimeout(function () {
-                        $('#aerror').hide('fade');
-                    }, 2000);
-
-
-                });
-            </script>
-        }
-    }
-
-    @if (ViewBag.UpdateMessage != null)
-    {
-        if (ViewBag.UpdateMessage == true)
-        {
-
-            <script type="text/javascript">
-                $(document).ready(function () {
-
-                    $('#ausuccess').show('fade');
-
-                    setTimeout(function () {
-                        $('#ausuccess').hide('fade');
-                    }, 2000);
-
-
-                });
-            </script>
-        }
-
-        else
-        {
-
-            <script type="text/javascript">
-                $(document).ready(function () {
-
-                    $('#auerror').show('fade');
-
-                    setTimeout(function () {
-                        $('#auerror').hide('fade');
-                    }, 2000);
-
-
-                });
-            </script>
-        }
-    }
-
-    @if (ViewBag.AddMessage != null)
-    {
-        if (ViewBag.AddMessage == true)
-        {
-            <script type="text/javascript">
-
-                $(document).ready(function () {
-
-                    document.forms[0].reset();
-                    $('#aasuccess').show('fade');
-
-                    setTimeout(function () {
-                        $('#aasuccess').hide('fade');
-                    }, 2000);
-
-                });
-            </script>
-        }
-
-        else
-        {
-            <script type="text/javascript">
-
-                $(document).ready(function () {
-
-                    $('#aaerror').show('fade');
-
-                    setTimeout(function () {
-                        $('#aaerror').hide('fade');
-                    }, 2000);
-
-
-                });
-            </script>
-
-        }
-
-    }
-    @if (ViewBag.ModalView != null)
-    {
-        if (ViewBag.ModalView == 1)
-        {
-            <script>
-
-            </script>
-        }
-
-    }
     <script src="~/Scripts/jquery-3.3.1.min.js"></script>
     <script src="~/Scripts/jquery.validate.min.js"></script>
     <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
@@ -471,11 +351,7 @@
             $('#AddAdminModal').modal();
         }
         );
-        $('#updateBtn').click(function () {
-
-            $('#updateModal').modal();
-        }
-        );
+      
         function Updatet(id) {
             $.ajax({
                 type: "GET",
