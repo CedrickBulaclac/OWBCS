@@ -10,8 +10,8 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>View</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css" />
+    <link rel="stylesheet" href="~/Content/bootstrap3.3.7.css" />
+    <link rel="stylesheet" href="~/Content/Datatable.css" />
     <link href="~/Content/themes/base/jquery-ui.min.css" rel="stylesheet" />
 </head>
 <body>
@@ -30,7 +30,7 @@
                             <div class="row">
                                 @Html.LabelFor(model => model.Fname, htmlAttributes: new { @class = "control-label col-md-2" })
                                 <div class="col-lg-12">
-                                    @Html.EditorFor(model => model.Fname, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.EditorFor(model => model.Fname, new { htmlAttributes = new { @class = "form-control", @required = "required" } })
                                     @Html.ValidationMessageFor(model => model.Fname, "", new { @class = "text-danger" })
                                 </div>
                             </div>
@@ -38,7 +38,7 @@
                             <div class="row">
                                 @Html.LabelFor(model => model.Mname, htmlAttributes: new { @class = "control-label col-md-2" })
                                 <div class="col-lg-12">
-                                    @Html.EditorFor(model => model.Mname, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.EditorFor(model => model.Mname, new { htmlAttributes = new { @class = "form-control", @required = "required" } })
                                     @Html.ValidationMessageFor(model => model.Mname, "", new { @class = "text-danger" })
                                 </div>
                             </div>
@@ -46,7 +46,7 @@
                             <div class="row">
                                 @Html.LabelFor(model => model.Lname, htmlAttributes: new { @class = "control-label col-md-2" })
                                 <div class="col-lg-12">
-                                    @Html.EditorFor(model => model.Lname, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.EditorFor(model => model.Lname, new { htmlAttributes = new { @class = "form-control", @required = "required" } })
                                     @Html.ValidationMessageFor(model => model.Lname, "", new { @class = "text-danger" })
                                 </div>
                             </div>
@@ -54,7 +54,7 @@
                             <div class="row">
                                 @Html.LabelFor(model => model.Bdate, htmlAttributes: new { @class = "control-label col-md-2" })
                                 <div class="col-lg-12">
-                                    @Html.EditorFor(model => model.Bdate, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.EditorFor(model => model.Bdate, new { htmlAttributes = new { @class = "form-control", @required = "required" } })
                                     @Html.ValidationMessageFor(model => model.Bdate, "", new { @class = "text-danger" })
                                 </div>
                             </div>
@@ -73,13 +73,56 @@
                             </div>
                             <br />
                             <div class="row">
-                                @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+                                @Html.LabelFor(model => model.EmailAddress, htmlAttributes: new { @class = "control-label col-md-2" })
                                 <div class="col-lg-12">
-                                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
-                                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                                    @Html.EditorFor(model => model.EmailAddress, new { htmlAttributes = new { @class = "form-control", @required = "required" } })
+                                    @Html.ValidationMessageFor(model => model.EmailAddress, "", new { @class = "text-danger" })
                                 </div>
                             </div>
-
+                            <div class="row">
+                                @Html.LabelFor(model => model.Gender, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-lg-12">
+                                    Male
+                                    @Html.RadioButtonFor(model => model.Gender, "Male")
+                                    Female
+                                    @Html.RadioButtonFor(model => model.Gender, "Female")
+                                    @Html.ValidationMessageFor(model => model.Gender, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="row">
+                                @Html.LabelFor(model => model.ContactNo, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-lg-12">
+                                    @Html.EditorFor(model => model.ContactNo, new { htmlAttributes = new { @class = "form-control", @required = "required" } })
+                                    @Html.ValidationMessageFor(model => model.ContactNo, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="row">
+                                @Html.LabelFor(model => model.EmergencyNo, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-lg-12">
+                                    @Html.EditorFor(model => model.EmergencyNo, new { htmlAttributes = new { @class = "form-control", @required = "required" } })
+                                    @Html.ValidationMessageFor(model => model.EmergencyNo, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="row">
+                                @Html.LabelFor(model => model.MaritalStatus, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-lg-12">
+                                    @Html.DropDownListFor(model => model.MaritalStatus, new List<SelectListItem>
+                                         {
+                                       new SelectListItem() {Text = "Single", Value="Single"},
+                                       new SelectListItem() {Text = "Married", Value="Married"},
+                                        new SelectListItem() {Text = "Divorced", Value="Divorced"},
+                                         new SelectListItem() {Text = "Widowed", Value="Widowed"}
+                                    }, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.MaritalStatus, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="row">
+                                @Html.LabelFor(model => model.ResidentialAddress, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-lg-12">
+                                    @Html.TextAreaFor(model => model.ResidentialAddress, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.ResidentialAddress, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
                         </div>
                         <div class="modal-footer">
                             <button type="submit" class="btn btn-success" id="btnAdd" name="btnAdd" onclick="Insert()">Add Employee</button>
@@ -90,21 +133,25 @@
             </div>
         </div>
     }
-    @using (Html.BeginForm("AdminEdit", "Admin", FormMethod.Post))
+    @if (Model != null)
     {
-        <div class="container">
-            <div class="modal fade" id="updateModal" role="dialog">
+        using (Html.BeginForm("AdminView", "Admin", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            <div class="modal fade" id="UpdateModal" role="dialog">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal">&times;</button>
                         </div>
                         <div class="modal-body">
-                            @Html.EditorFor(model => model.Id, new { htmlAttributes = new { @class = "form-control", @id = "txtId", @name = "txtId", @style = "display:none" } })
+                            <br />
+                            @Html.HiddenFor(model => model.Id, new { htmlAttributes = new { @class = "form-control" } })
+
                             <div class="row">
                                 @Html.LabelFor(model => model.Fname, htmlAttributes: new { @class = "control-label col-md-2" })
                                 <div class="col-lg-12">
-                                    @Html.EditorFor(model => model.Fname, new { htmlAttributes = new { @class = "form-control", @id = "txtFname", @name = "txtFname" } })
+                                    @Html.EditorFor(model => model.Fname, new { htmlAttributes = new { @class = "form-control", @required = "required" } })
                                     @Html.ValidationMessageFor(model => model.Fname, "", new { @class = "text-danger" })
                                 </div>
                             </div>
@@ -112,7 +159,7 @@
                             <div class="row">
                                 @Html.LabelFor(model => model.Mname, htmlAttributes: new { @class = "control-label col-md-2" })
                                 <div class="col-lg-12">
-                                    @Html.EditorFor(model => model.Mname, new { htmlAttributes = new { @class = "form-control", @id = "txtMname", @name = "txtMname" } })
+                                    @Html.EditorFor(model => model.Mname, new { htmlAttributes = new { @class = "form-control", @required = "required" } })
                                     @Html.ValidationMessageFor(model => model.Mname, "", new { @class = "text-danger" })
                                 </div>
                             </div>
@@ -120,7 +167,7 @@
                             <div class="row">
                                 @Html.LabelFor(model => model.Lname, htmlAttributes: new { @class = "control-label col-md-2" })
                                 <div class="col-lg-12">
-                                    @Html.EditorFor(model => model.Lname, new { htmlAttributes = new { @class = "form-control", @id = "txtLname", @name = "txtLname" } })
+                                    @Html.EditorFor(model => model.Lname, new { htmlAttributes = new { @class = "form-control", @required = "required" } })
                                     @Html.ValidationMessageFor(model => model.Lname, "", new { @class = "text-danger" })
                                 </div>
                             </div>
@@ -128,7 +175,7 @@
                             <div class="row">
                                 @Html.LabelFor(model => model.Bdate, htmlAttributes: new { @class = "control-label col-md-2" })
                                 <div class="col-lg-12">
-                                    @Html.EditorFor(model => model.Bdate, new { htmlAttributes = new { @class = "form-control", @id = "txtBdate", @name = "txtBdate" } })
+                                    @Html.EditorFor(model => model.Bdate, new { htmlAttributes = new { @class = "form-control", @required = "required" } })
                                     @Html.ValidationMessageFor(model => model.Bdate, "", new { @class = "text-danger" })
                                 </div>
                             </div>
@@ -141,16 +188,60 @@
                                       new SelectListItem() {Text = "Accountant", Value="Accountant"},
                                       new SelectListItem() {Text = "Cashier", Value="Cashier"}
 
-                                   }, new { @class = "form-control", @id = "cboPosition", @name = "cboPosition" })
+                                   }, new { @class = "form-control" })
                                     @Html.ValidationMessageFor(model => model.Position, "", new { @class = "text-danger" })
                                 </div>
                             </div>
                             <br />
                             <div class="row">
-                                @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+                                @Html.LabelFor(model => model.EmailAddress, htmlAttributes: new { @class = "control-label col-md-2" })
                                 <div class="col-lg-12">
-                                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", @id = "txtEmail", @name = "txtEmail" } })
-                                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                                    @Html.EditorFor(model => model.EmailAddress, new { htmlAttributes = new { @class = "form-control", @required = "required" } })
+                                    @Html.ValidationMessageFor(model => model.EmailAddress, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="row">
+                                @Html.LabelFor(model => model.Gender, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-lg-12">
+                                    Male
+                                    @Html.RadioButtonFor(model => model.Gender, "Male")
+                                    Female
+                                    @Html.RadioButtonFor(model => model.Gender, "Female")
+                                    @Html.ValidationMessageFor(model => model.Gender, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="row">
+                                @Html.LabelFor(model => model.ContactNo, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-lg-12">
+                                    @Html.EditorFor(model => model.ContactNo, new { htmlAttributes = new { @class = "form-control", @required = "required" } })
+                                    @Html.ValidationMessageFor(model => model.ContactNo, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="row">
+                                @Html.LabelFor(model => model.EmergencyNo, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-lg-12">
+                                    @Html.EditorFor(model => model.EmergencyNo, new { htmlAttributes = new { @class = "form-control", @required = "required" } })
+                                    @Html.ValidationMessageFor(model => model.EmergencyNo, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="row">
+                                @Html.LabelFor(model => model.MaritalStatus, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-lg-12">
+                                    @Html.DropDownListFor(model => model.MaritalStatus, new List<SelectListItem>
+                                         {
+                                       new SelectListItem() {Text = "Single", Value="Single"},
+                                       new SelectListItem() {Text = "Married", Value="Married"},
+                                        new SelectListItem() {Text = "Divorced", Value="Divorced"},
+                                         new SelectListItem() {Text = "Widowed", Value="Widowed"}
+                                    }, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.MaritalStatus, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="row">
+                                @Html.LabelFor(model => model.ResidentialAddress, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-lg-12">
+                                    @Html.TextAreaFor(model => model.ResidentialAddress, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.ResidentialAddress, "", new { @class = "text-danger" })
                                 </div>
                             </div>
                         </div>
@@ -161,13 +252,16 @@
                     </div>
                 </div>
             </div>
-        </div>
+        }
     }
     <div class="container">
         <div class="table-responsive">
             <table class="table table-striped" id="adminData">
                 <thead>
                     <tr>
+                        <th>
+                            Admin Id
+                        </th>
                         <th>
                             First Name
                         </th>
@@ -178,7 +272,7 @@
                             Last name
                         </th>
                         <th>
-                            Birthday
+                            Birthdate
                         </th>
 
                         <th>
@@ -195,15 +289,161 @@
         </button>
     </div>
 
+    <div class="container">
+        <div id="auerror" class="alert alert-danger collapse">
+            <a href="#" class="close" data-dismiss="alert">&times;</a>
+            <strong>Error!</strong> There is a problem updating the Admin
+        </div>
+        <div id="ausuccess" class="alert alert-success collapse">
+            <strong>Success!</strong> You have successfully updated the Admin
+        </div>
+
+        <div id="aerror" class="alert alert-danger collapse">
+            <a href="#" class="close" data-dismiss="alert">&times;</a>
+            <strong>Error!</strong> There is a problem deleting the Admin
+        </div>
+        <div id="asuccess" class="alert alert-success collapse">
+            <strong>Success!</strong> You have successfully deleted the Admin
+        </div>
+
+        <div id="aaerror" class="alert alert-danger collapse">
+            <a href="#" class="close" data-dismiss="alert">&times;</a>
+            <strong>Error!</strong> There is a problem submitting your form
+        </div>
+        <div id="aasuccess" class="alert alert-success collapse">
+            <strong>Success!</strong> You have successfully added a Admin
+        </div>
+    </div>
+
+    @if (ViewBag.DeleteStatus != null)
+    {
+        if (ViewBag.DeleteStatus == true)
+        {
+
+            <script type="text/javascript">
+                $(document).ready(function () {
+
+                    $('#asuccess').show('fade');
+
+                    setTimeout(function () {
+                        $('#asuccess').hide('fade');
+                    }, 2000);
+                });
+            </script>
+        }
+
+        else
+        {
+
+            <script type="text/javascript">
+                $(document).ready(function () {
+
+                    $('#aerror').show('fade');
+
+                    setTimeout(function () {
+                        $('#aerror').hide('fade');
+                    }, 2000);
+
+
+                });
+            </script>
+        }
+    }
+
+    @if (ViewBag.UpdateMessage != null)
+    {
+        if (ViewBag.UpdateMessage == true)
+        {
+
+            <script type="text/javascript">
+                $(document).ready(function () {
+
+                    $('#ausuccess').show('fade');
+
+                    setTimeout(function () {
+                        $('#ausuccess').hide('fade');
+                    }, 2000);
+
+
+                });
+            </script>
+        }
+
+        else
+        {
+
+            <script type="text/javascript">
+                $(document).ready(function () {
+
+                    $('#auerror').show('fade');
+
+                    setTimeout(function () {
+                        $('#auerror').hide('fade');
+                    }, 2000);
+
+
+                });
+            </script>
+        }
+    }
+
+    @if (ViewBag.AddMessage != null)
+    {
+        if (ViewBag.AddMessage == true)
+        {
+            <script type="text/javascript">
+
+                $(document).ready(function () {
+
+                    document.forms[0].reset();
+                    $('#aasuccess').show('fade');
+
+                    setTimeout(function () {
+                        $('#aasuccess').hide('fade');
+                    }, 2000);
+
+                });
+            </script>
+        }
+
+        else
+        {
+            <script type="text/javascript">
+
+                $(document).ready(function () {
+
+                    $('#aaerror').show('fade');
+
+                    setTimeout(function () {
+                        $('#aaerror').hide('fade');
+                    }, 2000);
+
+
+                });
+            </script>
+
+        }
+
+    }
+    @if (ViewBag.ModalView != null)
+    {
+        if (ViewBag.ModalView == 1)
+        {
+            <script>
+
+            </script>
+        }
+
+    }
     <script src="~/Scripts/jquery-3.3.1.min.js"></script>
     <script src="~/Scripts/jquery.validate.min.js"></script>
     <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
-    <script src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
+    <script src="~/Content/moment.js"></script>
+    <script src="~/Content/Datatable.js"></script>
     <script>
+        var modalvalue = @ViewBag.ModalView;
             $(document).ready(function () {
 
-              var mess=@Session["status"];
             var table = $('#adminData').DataTable({
                 "ajax": {
                     "url": '/Admin/GetAdmin',
@@ -211,25 +451,19 @@
                     "datatype": "json",
                 },
                 "columns": [
+                    { "data": "AdminId", "autowidth": true },
                     { "data": "Fname", "autowidth": true },
                     { "data": "Mname", "autowidth": true },
                     { "data": "Lname", "autowidth": true },
                     { "data": "Bdate", render: function (data, type, announcement) { return announcement.FormattedDate }, "autowidth": true },
-                    { "data": "Email", "autowidth": true },
+                    { "data": "EmailAddress", "autowidth": true },
                     { "data": "Position", "autowidth": true },
-                    { "data": "Id", "autowidth": true, render: function (data) { return '<button class="btn btn-primary" id="updateBtn" onclick="Updatet(' + data + ')">Update</button> <button class="btn btn-danger" id="deleteBtn" onclick="Delete(' + data + ')">Delete</button>' } }
+                    { "data": "Id", "autowidth": true, render: function (data) { return '<button class="btn btn-default" onclick="ViewOther(' + data + ')"><i class="glyphicon glyphicon-eye-open"></i></button> <a id="btnUpdate" class="btn btn-primary" href="/Admin/AdminView/' + data + '"><i class="glyphicon glyphicon-edit"></i></a> <a id="btnUpdate" class="btn btn-danger" href="/Admin/Delete/' + data + '"><i class="glyphicon glyphicon-trash"></i></a>'} }
 
                 ]
-            });
-                if (mess == 1) {
-                    document.forms[0].reset();
-                    alert("Success!");
-                }
-                else if (mess == 2) {
-                    alert("Email is already exist!");
-                }
-                else if (mess == 3) {
-                    alert("Submission Failed");
+                });
+                if (modalvalue == 1) {
+                    $('#UpdateModal').modal();
                 }
         });
         $('#addbtn').click(function () {
@@ -247,8 +481,8 @@
                 type: "GET",
                 url: "/Admin/AdminEdit",
                 data: { Id: id },
-                success: function (data) {               
-                    $('#txtId').val(data.Id)                    
+                success: function (data) {
+                    $('#txtId').val(data.Id)
                     document.getElementById('txtFname').value = data.Fname;
                     document.getElementById('txtMname').value = data.Mname;
                     document.getElementById('txtLname').value = data.Lname;

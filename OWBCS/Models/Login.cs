@@ -14,11 +14,11 @@ namespace OWBCS
         public int Locked { get; set; }
         public string CreatedBy { get; set; }
         public string ModifyBy { get; set; }
-        public DateTime DateCreated { get; set; }
+        public DateTime CreatedDate { get; set; }
         public DateTime ModifiedDate { get; set; }
         public int Level { get; set; }
         public DateTime LastLogin { get; set; }
-
+      
         public Login CreateObject(SqlDataReader reader)
         {
             Login ret = new Login();
@@ -27,12 +27,11 @@ namespace OWBCS
             ret.Hash = reader.GetString(2);
             ret.CreatedBy = reader.GetString(3);
             ret.ModifyBy = reader.GetString(4);
-            ret.DateCreated = reader.GetDateTime(5);
+            ret.CreatedDate = reader.GetDateTime(5);
             ret.ModifiedDate = reader.GetDateTime(6);
             ret.Level = Convert.ToInt32(reader.GetValue(7));
             ret.Locked = Convert.ToInt32(reader.GetValue(8));
-            ret.LastLogin = reader.GetDateTime(9);
-
+            ret.LastLogin = reader.GetDateTime(9);            
             return ret;
         }
 
@@ -43,7 +42,7 @@ namespace OWBCS
             this.CreatedBy = string.Empty;
             this.Locked = 0;
             this.ModifyBy = string.Empty;
-            this.DateCreated = DateTime.Today;
+            this.CreatedDate = DateTime.Today;
             this.ModifiedDate = DateTime.Today;
             this.LastLogin = DateTime.Today;
             this.Level = 0;

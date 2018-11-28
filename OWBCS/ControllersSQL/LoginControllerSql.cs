@@ -9,8 +9,7 @@ namespace OWBCS
     {
         public static bool Insert(Login usr)
         {
-            const string GET_INSERT = @"insert [tbLogin] (Username,Hash, Lockout, CreatedBy, ModifiedBy, CreatedDate, ModifiedDate,Level,LastLogin) values (@Username,@Hash, 0 , @CreatedBy, @ModifiedBy, getdate(), getdate(), @Level, getdate())";
-
+            const string GET_INSERT = @"insert [tbLogin] (Username,Hash,CreatedBy,ModifiedBy,CreatedDate,ModifiedDate,Level,Lockout,LastLogin) values (@Username,@Hash,@CreatedBy,@ModifiedBy,@CreatedDate,@ModifiedDate,@Level,@Lockout,@LastLogin)";
             SqlCommand com = new SqlCommand(GET_INSERT);
             com.Parameters.Add(new SqlParameter("@Username", usr.Username));
             com.Parameters.Add(new SqlParameter("@Hash", usr.Hash));
@@ -18,12 +17,14 @@ namespace OWBCS
             com.Parameters.Add(new SqlParameter("@CreatedBy", usr.CreatedBy));
             com.Parameters.Add(new SqlParameter("@ModifiedBy", usr.ModifyBy));
             com.Parameters.Add(new SqlParameter("@Level", usr.Level));
-
+            com.Parameters.Add(new SqlParameter("@ModifiedDate", usr.ModifiedDate));
+            com.Parameters.Add(new SqlParameter("@CreatedDate", usr.CreatedDate));
+            com.Parameters.Add(new SqlParameter("@LastLogin", usr.LastLogin));
             return SqlManager.ExecuteNonQuery(com);
         }
         public static List<Login> GetAll(string email)
         {
-            const string GET_ALL = @"SELECT Id,Username,Hash,CreatedBy,ModifiedBy,CreatedDate,ModifiedDate,Level,Lockout,LastLogin FROM [tbLogin] where Username=@email and Lockout=0";
+            const string GET_ALL = @"select Id,Username,Hash,CreatedBy,ModifiedBy,CreatedDate,ModifiedDate,Level,Lockout,LastLogin from tbLogin where Username=@email and Lockout=0";
             List<Login> ret = default(List<Login>);
             SqlCommand com = new SqlCommand(GET_ALL);
             com.Parameters.Add(new SqlParameter("@email", email));

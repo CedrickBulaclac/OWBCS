@@ -12,15 +12,7 @@ namespace OWBCS.Controllers
     public class AdminController : Controller
     {
         // GET: Admin
-        public ActionResult AdminView()
-        {
-            if (Session["status"] == null)
-            {
-                Session["status"] = 0;
-            }
-        
-            return View();
-        }
+    
         public ActionResult Home()
         {
             return View();
@@ -28,47 +20,61 @@ namespace OWBCS.Controllers
         [HttpPost]
         public ActionResult AdminAdd(Admin adm)
         {
+            bool status = false;
+            DateTime day = DateTime.Now;
             Session["status"] = null;
             List<Login> loglist = new List<Login>();
-            loglist = LoginControllerSql.GetAll(adm.Email);
+            loglist = LoginControllerSql.GetAll(adm.EmailAddress);
+            string aid = day.ToShortDateString() + adm.Bdate.ToShortDateString();
+            aid = aid.Replace("/","");
             if (loglist.Count == 0)
             {
-                Admin ret = new Admin
+                int level = 0;
+                if (adm.Position == "Finance")
                 {
-                    Fname = adm.Fname,
-                    Mname = adm.Mname,
-                    Lname = adm.Lname,
-                    Bdate = adm.Bdate,
-                    Deleted = "0",
-                    Email = adm.Email,
-                    Url = "---",
-                    Position = adm.Position,
-                    LoginId = 0
+                    level = 2;
+                }
+                else if (adm.Position == "Accountant")
+                {
+                    level = 3;
+                }
+                string pass = Hash((adm.Bdate.ToShortDateString()));
+                Login log = new Login
+                {
+                    Username = adm.EmailAddress,
+                    Hash = pass,
+                    CreatedBy = "none",
+                    ModifyBy = "none",
+                    Level = level,
+                    CreatedDate = day,
+                    ModifiedDate = day,
+                    Locked = 0,
+                    LastLogin = day
                 };
-                bool status = false;
-                status = AdminControllerSql.Insert(ret);
+                status = LoginControllerSql.Insert(log);
+               
                 if (status == true)
                 {
-
-                    int level = 0;
-                    if (adm.Position == "Finance")
+                    List<Login> ul = LoginControllerSql.GetAll(adm.EmailAddress);
+                    Admin ret = new Admin
                     {
-                        level = 2;
-                    }
-                    else if (adm.Position == "Accountant")
-                    {
-                        level = 3;
-                    }
-                    string pass = Hash((adm.Bdate.ToShortDateString()));
-                    Login log = new Login
-                    {
-                        Username = adm.Email,
-                        Hash = pass,
-                        CreatedBy = "none",
-                        ModifyBy = "none",
-                        Level = level
-                    };
-                    status = LoginControllerSql.Insert(log);
+                        Fname = adm.Fname,
+                        Mname = adm.Mname,
+                        Lname = adm.Lname,
+                        Bdate = adm.Bdate,
+                        Deleted = 0,
+                        EmailAddress = adm.EmailAddress,
+                        Url = "---",
+                        Position = adm.Position,
+                        MaritalStatus = adm.MaritalStatus,
+                        ContactNo = adm.ContactNo,
+                        EmergencyNo = adm.EmergencyNo,
+                        AdminId = aid,
+                        ResidentialAddress = adm.ResidentialAddress,
+                        LoginId=ul[0].Id,
+                        Gender=adm.Gender
+                    };                    
+                    status = AdminControllerSql.Insert(ret);
                     Session["status"] = 1;
                 }
             }
@@ -77,18 +83,46 @@ namespace OWBCS.Controllers
                 Session["status"] = 2;
                 Response.Write("<script type='text/javascript'>alert('Email is already exist');</script>");
             }
-                                     
-            return RedirectToAction("AdminView","Admin");
+            Session["AddMessage"] = status;
+            return RedirectToAction("AdminView","Admin",new { id=""});
         }
         [HttpGet]
-        public JsonResult AdminEdit(int Id)
+        public ActionResult AdminView(int? Id)
         {
-            Admin a = new Admin();
-            a = AdminControllerSql.GetById(Id);
-            return new JsonResult { Data = a, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+            if (Session["UpdateMess"] != null)
+            {
+                ViewBag.UpdateMessage = Session["UpdateMess"];
+                Session["UpdateMess"] = null;
+            }
+            if (Session["AddMessage"] != null)
+            {
+                ViewBag.AddMessage = Session["AddMessage"];
+                Session["AddMessage"] = null;
+            }
+            if (Session["DeleteStatus"] != null)
+            {
+                ViewBag.DeleteStatus = Session["DeleteStatus"];
+                Session["DeleteStatus"] = null;
+            }
+            if (Id == null)
+            {
+                if (Session["status"] == null)
+                {
+                    Session["status"] = 0;
+                }
+                ViewBag.ModalView = 0;
+                return View();
+            }
+            else
+            {
+                Admin a = new Admin();
+                a = AdminControllerSql.GetById((int)Id);
+                ViewBag.ModalView = 1;
+                return View(a);
+            }           
         }
         [HttpPost]
-        public ActionResult AdminEdit(Admin adm)
+        public ActionResult AdminView(Admin adm)
         {
             Session["status"] = null;
             Admin ret = new Admin
@@ -97,18 +131,24 @@ namespace OWBCS.Controllers
                 Fname = adm.Fname,
                 Mname = adm.Mname,
                 Lname = adm.Lname,
-                Bdate = adm.Bdate,
-                Email = adm.Email,
-                Position = adm.Position,              
+                Bdate = adm.Bdate,          
+                EmailAddress = adm.EmailAddress,          
+                Position = adm.Position,           
+                MaritalStatus = adm.MaritalStatus,
+                ContactNo = adm.ContactNo,
+                EmergencyNo = adm.EmergencyNo,              
+                ResidentialAddress = adm.ResidentialAddress,
+                Gender=adm.Gender
             };
             bool status = false;
             status = AdminControllerSql.Update(ret);
             if (status == true)
             {
                 Session["status"] = 1;
+                //Response.Write("<script>alert('You have successfully updated the Admin');</script>");
             }
-           
-            return Redirect("~/Admin/AdminView");
+            Session["UpdateMess"] = status;
+            return RedirectToAction("AdminView","Admin",new { id = "" });
         }
         public ActionResult GetAdmin()
         {
@@ -116,7 +156,8 @@ namespace OWBCS.Controllers
             ret = AdminControllerSql.GetAll();
             return Json(new { data = ret }, JsonRequestBehavior.AllowGet);
         }
-        public JsonResult Deleted(int Id)
+        [HttpGet]
+        public ActionResult Deleted(int Id)
         {
             Admin ret = new Admin
             {
@@ -124,7 +165,8 @@ namespace OWBCS.Controllers
             };
             bool status = false;
             status = AdminControllerSql.Delete(ret);
-            return new JsonResult { Data = status, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+            Session["DeleteStatus"] = status;
+            return RedirectToAction("AdminView", "Admin", new { id = "" });
         }
         private string Hash(string p)
         {
@@ -171,6 +213,5 @@ namespace OWBCS.Controllers
                 Response.Write(script);
             }
         }
-
     }
 }

@@ -27,6 +27,10 @@ namespace OWBCS.Controllers
                 string hash = Hash(pass);
                 Login log = new Login();
                 log = LoginControllerSql.Get(username, hash);
+                if(username=="")
+                {
+                    return RedirectToAction("Home", "Admin");
+                }
                 if(log.Id!=0)
                 {
                     return RedirectToAction("Home", "Admin");
