@@ -1,0 +1,413 @@
+﻿@import url('https://fonts.googleapis.com/css?family=Oxygen');
+
+body {
+    font: 15px/1.5 Arial, Helvetica,sans-serif;
+    padding: 0;
+    margin: 0;
+    height: 100%;
+    width: 100%;
+    background-color: #f4f4f4;
+}
+
+/* Global */
+.container {
+    width: 80%;
+    margin: auto;
+    overflow: hidden;
+}
+
+ul {
+    margin: 0;
+    padding: 0;
+}
+
+.button_1 {
+    height: 38px;
+    border-radius: 5px;
+    background: #6fb2c1;
+    border: 0;
+    padding-left: 20px;
+    padding-right: 20px;
+    color: #ffffff;
+    margin-top: 5px;
+}
+
+.Email_button {
+    height: 40px;
+    border-radius: 5px;
+    background: #6fb2c1;
+    border: 0;
+    padding-left: 20px;
+    padding-right: 20px;
+    color: #ffffff;
+}
+
+.dark {
+    padding: 15px;
+    background: #35424a;
+    color: #ffffff;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.content {
+    text-align: center;
+}
+
+    .content h1 {
+        letter-spacing: 1px;
+    }
+/*login box*/
+
+.login_container {
+    position: absolute;
+    border-radius: 10px;
+    top: 55%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    width: 700px;
+    height: 350px;
+    background: #35424a
+}
+
+    .login_container .form_content,
+    .login_container .login_form {
+        position: relative;
+        width: 50%;
+        height: 350px;
+        float: left;
+        box-sizing: border-box;
+    }
+
+    .login_container .form_content {
+        padding: 40px 40px;
+        color: #ffffff;
+    }
+
+        .login_container .form_content a {
+            display: inline-block;
+            border-radius: 5px;
+            padding: 10px 20px;
+            color: #ffffff;
+            background: #6fb2c1;
+            text-decoration: none;
+            box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+        }
+
+    .login_container .login_form {
+        background: #ffffff;
+        height: 380px;
+        top: -15px;
+        box-shadow: -20px 0 15px rgba(0,0,0,0.2);
+        padding: 30px;
+    }
+
+        .login_container .login_form h1 {
+            color: #262626;
+        }
+
+        .login_container .login_form input {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            box-sizing: border-box;
+            margin-bottom: 20px;
+            border: 2px solid #ccc;
+            border-radius: 25px;
+            outline: none;
+            font-size: 15px;
+        }
+
+            .login_container .login_form input:hover,
+            .login_container .login_form input:valid {
+                border: 2px solid #35424a;
+            }
+
+            .login_container .login_form input[type=submit] {
+                color: #ffffff;
+                background: #35424a;
+                font-size: 16px;
+                transition: .5s;
+            }
+
+                .login_container .login_form input[type=submit] :hover {
+                    background: #35424a;
+                    border: 2px solid #35424a;
+                }
+
+        .login_container .login_form a {
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+.login_display {
+    height: 100vh;
+    background: url('../img/Display.jpg');
+    background-size: cover;
+}
+/*contact Us*/
+.form {
+    width: 100%;
+    margin: 50px 0;
+}
+
+.top-form,
+.bottom-form {
+    width: 100%;
+    min-height: 70px;
+    overflow: hidden;
+}
+
+.form input[type="text"],
+.form textarea {
+    padding: 15px 5px;
+    box-sizing: border-box;
+    width: 100%;
+    border: 2px solid #fff;
+    border-radius: 10px;
+    outline: none;
+    transaction: all 0.2s ease;
+}
+
+    .form input:focus,
+    .form textarea:focus {
+        border-color: #4ca1af;
+        box-shadow: offset 0 1px 1px rgba(0,0,0,0.0125), 0 0 8px rgba(75,161,175,0.5);
+    }
+
+.form .label {
+    margin-bottom: 5px;
+    text-transform: capitalize;
+}
+
+.top-form .inner-form {
+    width: 29.9%;
+    float: left;
+    margin-right: 5%;
+}
+
+    .top-form .inner-form:last-child {
+        margin-right: 0;
+    }
+/* Header **/
+header {
+    background: #35424a;
+    color: #ffffff;
+    padding-top: 30px;
+    min-height: 70px;
+    border-bottom: #6fb2c1 3px solid;
+}
+
+    header a {
+        color: #ffffff;
+        text-decoration: none;
+        text-transform: uppercase;
+        font-size: 16px;
+    }
+
+    header li {
+        display: inline;
+        padding: 0 20px 0 20px;
+    }
+
+    header #branding {
+        float: left;
+    }
+
+        header #branding h1 {
+            margin: 0;
+        }
+
+    header nav {
+        float: right;
+        margin-top: 10px;
+    }
+
+    header .highlight, header .current a {
+        color: #6fb2c1;
+        font-weight: bold;
+    }
+
+    header a:hover {
+        color: #cccccc;
+        font-weight: bold;
+    }
+
+/* Showcase */
+#display {
+    min-height: 600px;
+    width: 100%;
+    background: url('../img/Display.jpg') no-repeat 20%;
+    text-align: center;
+    color: #ffffff;
+}
+
+    #display h1 {
+        margin-top: 100px;
+        font-size: 55px;
+        margin-bottom: 10px;
+    }
+
+    #display p {
+        font-size: 20px;
+    }
+
+/* signup */
+#contact {
+    padding: 15px;
+    color: #ffffff;
+    background: #35424a;
+}
+
+    #contact h1 {
+        float: left;
+    }
+
+    #contact form {
+        float: right;
+        margin-top: 15px;
+    }
+
+    #contact a {
+        background: #35424a ;
+        color: #ffffff;
+        text-decoration: none;
+    }
+
+
+
+/* Box */
+#boxview {
+    margin-top: 20px;
+}
+
+    #boxview .box {
+        float: left;
+        text-align: center;
+        width: 30%;
+        padding: 10px;
+    }
+
+        #boxview .box img {
+            width: 90px;
+        }
+/*contact_sidebar*/
+aside#contact_sidebar {
+    float: left;
+    width: 100%;
+    margin-top: 600px;
+    padding: 5px;
+    color: #ffffff;
+}
+/* Sidebar right*/
+aside#sidebar {
+    float: right;
+    width: 30%;
+    margin-top: 5px;
+}
+
+    aside#sidebar p {
+        text-align: justify;
+    }
+
+    aside#sidebar .quote input, aside#sidebar .quote textarea {
+        width: 90%;
+        padding: 5px;
+    }
+/*sidebar right*/
+aside#sidebar_2 {
+    float: left;
+    width: 100%;
+    margin-top: 100px;
+}
+
+
+/* Main-col */
+article#main_col {
+    float: left;
+    width: 65%;
+}
+
+    article#main_col p {
+        text-align: justify;
+    }
+
+/* Services */
+ul#services li {
+    list-style: none;
+    padding: 20px;
+    border: #cccccc solid 1px;
+    margin-bottom: 5px;
+    background: #e6e6e6;
+}
+
+footer {
+    padding: 20px;
+    margin-top: 20px;
+    color: #ffffff;
+    background-color: #6fb2c1;
+    text-align: center;
+}
+/*login*/
+
+
+/* Media Queries */
+@media screen and (max-width: 768px) {
+    header #branding,
+    header nav,
+    header nav li,
+    #contact h1,
+    #contact form,
+    #boxview .box,
+    article#main_col,
+    aside#sidebar,
+    .login_container,
+    .login_form,
+    .form_content,
+    aside#contact_sidebar {
+        float: none;
+        text-align: center;
+        width: 100%;
+    }
+
+    header {
+        padding-bottom: 20px;
+    }
+
+    #showcase h1 {
+        margin-top: 40px;
+    }
+
+    #contact button, .quote button {
+        display: block;
+        width: 100%;
+    }
+
+    #wrapper {
+        margin: 0 auto;
+        padding: 0px;
+        text-align: center;
+        width: 995px;
+    }
+    /* Newsletter */
+    #newsletter {
+        padding: 15px;
+        color: #ffffff;
+        background: #35424a
+    }
+
+        #newsletter h1 {
+            float: left;
+        }
+
+        #newsletter form {
+            float: right;
+            margin-top: 15px;
+        }
+
+        #newsletter input[type="email"] {
+            padding: 4px;
+            height: 25px;
+            width: 250px;
+        }
+}

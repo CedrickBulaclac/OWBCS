@@ -1,30 +1,53 @@
-﻿@{
-    Layout = "";
+﻿
+@{
+    Layout = "/Views/Layout/LayoutHome.cshtml";
 }
-@Styles.Render("~/Content/css")
-@Scripts.Render("~/bundles/modernizr")
-@using (Html.BeginForm("Index", "Home", FormMethod.Post))
-{
-    @Html.AntiForgeryToken()
-    <br />
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <meta name="description" content="Restaurant Rating Made More Fun">
+    <meta name="keywords" content="Eat, Enjoy, Earn">
+    <meta name="author" content="PaoloVillena">
+    <title>ReastauRate|Login</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.cyan-light_blue.min.css">
+    <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Nunito:400,600,700" rel="stylesheet">
+    <link rel="stylesheet" href="~/Content/Css/StyleSheet1.css">
 
-    <center>
-        <div class="container">
-            <div class="panel">
-                <div class="page-header">
-                    <h1>Company Logo/Name</h1>
-                </div>
-                <div class="panel-body">
-                    <label>Username :</label> <input type="text" name="username" id="username" class="form-control" />
-                    <br />
-                    <label>Password :</label><input type="password" name="password" id="password" class="form-control" />
-                </div>
-                <div class="panel-footer">
-                    <button type="submit" class="btn btn-primary">Login</button>
-                </div>
+</head>
 
+<!--login forms-->
+<body>
+    <section class="login_display">
+
+        <div class="login_container">
+            <div class="form_content">
+                <h2>What is RestauRate?</h2>
+                <p>
+                    Phasellus interdum turpis a sapien iaculis, in mattis diam lacinia.
+                    Morbi ultricies efficitur feugiat.
+                </p>
+                <a href="#">Read More</a>
+            </div>
+            <div class="login_form">
+                <h1>Sign In</h1>
+                <form>
+                    <input type="email" name="" required="Please Enter your email" placeholder="Email" id="email_field">
+                    <input type="password" name="" required="Enter your password" placeholder="Password" id="password_field">
+                    <button onclick="login()" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored">
+                        <i class="material-icons">input</i>
+                    </button>
+                </form>
+                <a href="#">Forget Password</a>
             </div>
 
         </div>
-    </center>
-}
+
+    </section>
+
+</body>
+
+</html>

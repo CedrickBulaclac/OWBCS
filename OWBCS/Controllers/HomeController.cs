@@ -47,17 +47,13 @@ namespace OWBCS.Controllers
             }
             return View();
         }
-        public ActionResult About()
-        {
-            ViewBag.Message = "Your application description page.";
-
+        public ActionResult Home()
+        {         
             return View();
         }
 
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
+        public ActionResult About()
+        {         
             return View();
         }
         private string Hash(string p)
