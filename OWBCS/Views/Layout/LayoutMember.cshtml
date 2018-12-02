@@ -1,4 +1,4 @@
-﻿@{ 
+﻿@{
     Layout = "";
 }
 <!DOCTYPE html>
@@ -14,12 +14,10 @@
     <script defer src="~/Content/mdl/material.min.js"></script>
     <link rel="stylesheet" href="~/Content/Css/StyleSheet1.css">
     <link rel="icon" type="image/png" href="./img/RestauRate_logo.png">
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <style>
-        body {
+        /*body {
             background-image: url('/Content/Images/adminHomeBG.jpg');
-        }
+        }*/
 
         /*.demo-layout-transparent {
             background: url("~/Content/Images/adminHomeBG.jpg") center / cover;
@@ -41,20 +39,21 @@
             </div>
             <nav>
                 <ul>
-
-                    <li><a href="@Url.Action("Home","Home")">Home</a></li>
-                    <li><a href="@Url.Action("About","Home")">About Us</a></li>             
-                    <li><a href="@Url.Action("Index","Home")">Login</a></li>
+                    <li><a href="@Url.Action("Home","Member")">Home</a></li>
+                    <li><a href="@Url.Action("About","Home")">About Us</a></li>
+                    <li><a href="@Url.Action("Savings","Member")">Savings</a></li>
+                    <li><a href="@Url.Action("Loan","Loan")">Add Loan</a></li>
+                    <li><a href="@Url.Action("Index","Home")">Logout</a></li>
                 </ul>
             </nav>
         </div>
     </header>
     <div class=" container body-content">
         @RenderBody()
+        <br />
+        <br />
     </div>
-    <br />
-    <br />
-    <br />
+
     <footer>
         <p>RestauRate, Copyright &copy; @DateTime.Now.Year</p>
     </footer>

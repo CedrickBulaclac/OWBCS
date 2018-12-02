@@ -25,8 +25,11 @@ namespace OWBCS.Controllers
             Session["status"] = null;
             List<Login> loglist = new List<Login>();
             loglist = LoginControllerSql.GetAll(adm.EmailAddress);
-            string aid = day.ToShortDateString() + adm.Bdate.ToShortDateString();
-            aid = aid.Replace("/","");
+            List<Admin> adminlist = new List<Admin>();
+            adminlist = AdminControllerSql.GetAll();
+            int iid = adminlist.Count + 1;
+            string aid = "M" + (iid).ToString();
+
             if (loglist.Count == 0)
             {
                 int level = 0;

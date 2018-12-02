@@ -34,15 +34,17 @@
             </div>
             <div class="login_form">
                 <h1>Sign In</h1>
-                <form>
-                    <input type="email" name="" required="Please Enter your email" placeholder="Email" id="email_field">
-                    <input type="password" name="" required="Enter your password" placeholder="Password" id="password_field">
+                @using (Html.BeginForm("Index", "Home", FormMethod.Post))
+                {
+                    <input type="email" name="username" placeholder="Email" id="username">
+                    <input type="password" name="password" placeholder="Password" id="password">
                     <button onclick="login()" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored">
                         <i class="material-icons">input</i>
                     </button>
-                </form>
-                <a href="#">Forget Password</a>
-            </div>
+
+                    <a href="#">Forget Password</a>
+                }
+                </div>
 
         </div>
 

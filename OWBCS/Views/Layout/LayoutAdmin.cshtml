@@ -1,4 +1,4 @@
-﻿@{ 
+﻿@{
     Layout = "";
 }
 <!DOCTYPE html>
@@ -17,9 +17,9 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <style>
-        body {
+        /*body {
             background-image: url('/Content/Images/adminHomeBG.jpg');
-        }
+        }*/
 
         /*.demo-layout-transparent {
             background: url("~/Content/Images/adminHomeBG.jpg") center / cover;
@@ -43,8 +43,15 @@
                 <ul>
 
                     <li><a href="@Url.Action("Home","Home")">Home</a></li>
-                    <li><a href="@Url.Action("About","Home")">About Us</a></li>             
-                    <li><a href="@Url.Action("Index","Home")">Login</a></li>
+                    <li><a href="@Url.Action("About","Home")">About Us</a></li>
+                    <li><a href="@Url.Action("AdminView","Admin")">Admin</a></li>
+                    <li><a href="@Url.Action("MemberView","Member")">Member</a></li>
+                    @*<li class="dropdown">
+                <a class="dropdown-toggle hvr-underline-from-center" data-toggle="dropdown" href="#"> <span class="glyphicon glyphicon-user"> </span> Registration <span class="caret"></span> </a>
+                <ul class="dropdown-menu"></ul>
+        </li>*@
+                    <li><a href="@Url.Action("Savings","Savings")">Savings</a></li>
+                    <li><a href="@Url.Action("Index","Home")">Logout</a></li>
                 </ul>
             </nav>
         </div>

@@ -1,0 +1,237 @@
+﻿@model OWBCS.Member
+@{
+    Layout = "/Views/Layout/LayoutMember.cshtml";
+}
+<html>
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <meta name="description" content="Restaurant Rating Made More Fun">
+    <meta name="keywords" content="Eat, Enjoy, Earn">
+    <meta name="author" content="PaoloVillena">
+    <title>ReastauRate|Home</title>
+    <link rel="stylesheet" href="~/Content/Css/StyleSheet1.css">
+    <link rel="icon" type="image/png" href="./img/RestauRate_logo.png">
+</head>
+<body>
+    <br />
+    <br />
+    @using (Html.BeginForm("Loan", "Loan", FormMethod.Post))
+    {
+        <input type="hidden" name="mid" id="mid" value="@ViewBag.Id" />
+        <input type="hidden" name="no" id="no"/>
+        <div class="container">
+            <h3>Apply Loan</h3>
+            <hr />
+            <div class="container">
+                <center>
+                    <h4>Loan Information</h4>
+                </center>
+                <hr />
+                <div class="row">
+                    <div class="col-lg-4">
+                        <label>Name: </label>
+                    </div>
+                    <div class="col-lg-8">
+                        <b><label>@ViewBag.Fullname</label></b>
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col-lg-4">
+                        <label>Loanable Amount:</label>
+                    </div>
+                    <div class="col-lg-8">
+                        <select class="form-control" id="la" onchange="Compute()">
+                            <option value="15000">₱15,000</option>
+                        </select>
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col-lg-4">
+                        <label>Months To Pay</label>
+                    </div>
+                    <div class="col-lg-8">
+                        <select class="form-control" id="monthtp" onchange="Compute()">
+                            <option value="0">--Months to Pay--</option>
+                            <option value="6">6 months</option>
+                            <option value="12">12 months</option>
+                            <option value="24">24 months</option>
+                            <option value="36">36 months</option>
+                        </select>
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col-lg-4">
+                        <label>Interest Rate: </label>
+                    </div>
+                    <div class="col-lg-8">
+                        <b><label id="interest">1%</label></b>
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col-lg-4">
+                        <label>Total Payment w/ Interest: </label>
+                    </div>
+                    <div class="col-lg-8">
+                        <input type="text" class="form-control" id="totalwinterest" name="totalwinterest" readonly>
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col-lg-4">
+                        <label>Total Monthly Payment: </label>
+                    </div>
+                    <div class="col-lg-8">
+                        <input type="text" class="form-control" id="totalmpayment" name="totalmpayment" readonly>
+                    </div>
+                </div>
+
+            </div>
+            <div class="container">
+                <center>
+                    <h4>Witness</h4>
+                </center>
+                <hr />
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="col-lg-4">
+                            <label>Full Name: </label>
+                        </div>
+                        <div class="col-lg-8">
+                            <input type="text" class="form-control" id="witness1" name="witness1" required>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="col-lg-4">
+                            <label>Contact No: </label>
+                        </div>
+                        <div class="col-lg-8">
+                            <input type="text" class="form-control" id="witnesscno1" name="witnesscno1" required>
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="col-lg-4">
+                            <label>Full Name: </label>
+                        </div>
+                        <div class="col-lg-8">
+                            <input type="text" class="form-control" id="witness2" name="witness2" required>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="col-lg-4">
+                            <label>Contact No: </label>
+                        </div>
+                        <div class="col-lg-8">
+                            <input type="text" class="form-control" id="witnesscno2" name="witnesscno2" required>
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="col-lg-4">
+                            <label>Full Name: </label>
+                        </div>
+                        <div class="col-lg-8">
+                            <input type="text" class="form-control" id="witness3" name="witness3" required>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="col-lg-4">
+                            <label>Contact No: </label>
+                        </div>
+                        <div class="col-lg-8">
+                            <input type="text" class="form-control" id="witnesscno3" name="witnesscno3" required>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <center>
+                    <h4>Co-Maker</h4>
+                </center>
+                <hr />
+                <div class="row">
+                    <br />                 
+                    <div id="inputs">
+
+                    </div>
+
+
+                </div>
+
+            </div>
+            <br />
+            <div class="pull-right">
+                <button type="submit" class="btn btn-primary">Apply Loan</button>
+            </div>
+        </div>
+    }
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+    <script>
+        var number = 0;
+        var com = [null];
+        var con = [null];
+        function Compute() {
+            var monthtp = 0.0;
+            var sinterest = 0.0;
+            var ninterest = 0.0;
+            var loan = 0.0;
+            var monthtotal = 0.0;
+            var monthinterest = 0.0;
+            var total = 0.0;
+            var ltotal = 0.0;
+
+            var nco = 0.0;
+
+            monthtp = parseInt(document.getElementById('monthtp').value);
+            if (monthtp != 0) {
+                loan = parseFloat(document.getElementById('la').value).toFixed(2);
+                sinterest = document.getElementById('interest').innerHTML;
+                ninterest = sinterest.replace('%', '');
+                ninterest = (ninterest / 100) * monthtp;
+                total = loan * ninterest;
+                ltotal = parseInt(loan) + parseInt(total);
+                monthinterest = ltotal;
+                document.getElementById('totalwinterest').value = parseFloat(monthinterest).toFixed(2);
+                monthtotal = monthinterest / monthtp;
+                document.getElementById('totalmpayment').value = monthtotal;
+                nco = loan / 10000;
+                number = Math.ceil(nco);
+                document.getElementById('no').value = number;
+                AddInput();
+            }
+            else {
+                number = Math.ceil(nco);
+                AddInput();
+            }
+            document.getElementById('totalwinterest').value = parseFloat(monthinterest).toFixed(2);
+            document.getElementById('totalmpayment').value = parseFloat(monthtotal).toFixed(2);
+        }
+
+        function AddInput() {
+            $('#inputs').empty();
+            $('#inputs').append('<br/>');
+            if (number != 0) {
+                for (var i = 0; i <= number - 1; i++) {
+                    $('#inputs').append('<div class="row"><div class= "col-lg-6" ><div class="col-lg-4"><label>Full Name: </label></div><div class="col-lg-8"><input type="text" class="form-control" id="co' + i + '" name="co' + i + '" required></div></div><div class="col-lg-6"><div class="col-lg-4"><label>Contact No: </label></div><div class="col-lg-8"><input type="text" class="form-control" id="cno' + i + '" name="cno' + i + '"required></div></div></div>');
+                }
+            }
+       
+        }
+
+    </script>
+
+</body>
+</html>

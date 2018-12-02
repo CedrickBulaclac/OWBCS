@@ -150,16 +150,28 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="ControllersSQL\AdminControllerSql.cs" />
+    <Compile Include="ControllersSQL\ComakerControllerSql.cs" />
+    <Compile Include="ControllersSQL\ContributionCotrollerSql.cs" />
+    <Compile Include="ControllersSQL\LoanControllerSql.cs" />
     <Compile Include="ControllersSQL\LoginControllerSql.cs" />
+    <Compile Include="ControllersSQL\MemberControllerSql.cs" />
+    <Compile Include="ControllersSQL\WitnessControllerSql.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="BaseProperty.cs" />
+    <Compile Include="Controllers\LoanController.cs" />
+    <Compile Include="Controllers\MemberController.cs" />
+    <Compile Include="Controllers\SavingsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Admin.cs" />
+    <Compile Include="Models\Comaker.cs" />
+    <Compile Include="Models\Contribution.cs" />
+    <Compile Include="Models\Loan.cs" />
     <Compile Include="Models\Login.cs" />
     <Compile Include="Models\Member.cs" />
+    <Compile Include="Models\Witness.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SqlManager.cs" />
   </ItemGroup>
@@ -168,8 +180,16 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Css\StyleSheet1.css" />
     <Content Include="Content\Datatable.css" />
     <Content Include="Content\Datatable.js" />
+    <Content Include="Content\Images\adminHomeBG.jpg" />
+    <Content Include="Content\Images\Display.jpg" />
+    <Content Include="Content\mdl\material.css" />
+    <Content Include="Content\mdl\material.indigo-pink.min.css" />
+    <Content Include="Content\mdl\material.js" />
+    <Content Include="Content\mdl\material.min.css" />
+    <Content Include="Content\mdl\material.min.js" />
     <Content Include="Content\moment.js" />
     <Content Include="Content\themes\base\accordion.css" />
     <Content Include="Content\themes\base\all.css" />
@@ -238,6 +258,11 @@
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Content\bootstrap3.3.7.css" />
+    <Content Include="Content\mdl\bower.json" />
+    <Content Include="Content\mdl\LICENSE" />
+    <Content Include="Content\mdl\material.min.css.map" />
+    <Content Include="Content\mdl\material.min.js.map" />
+    <Content Include="Content\mdl\package.json" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -286,6 +311,16 @@
     <Content Include="Scripts\popper.js.map" />
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
+    <Content Include="Views\Member\MemberView.cshtml" />
+    <Content Include="Views\Member\MemberAdd.cshtml" />
+    <Content Include="Views\Savings\Savings.cshtml" />
+    <Content Include="Views\Layout\LayoutHome.cshtml" />
+    <Content Include="Views\Home\Home.cshtml" />
+    <Content Include="Views\Loan\Loan.cshtml" />
+    <Content Include="Views\Member\Home.cshtml" />
+    <Content Include="Views\Layout\LayoutMember.cshtml" />
+    <Content Include="Views\Member\Savings.cshtml" />
+    <Content Include="Views\Layout\LayoutAdmin.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

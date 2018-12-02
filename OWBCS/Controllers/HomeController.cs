@@ -31,7 +31,15 @@ namespace OWBCS.Controllers
                 {
                     return RedirectToAction("Home", "Admin");
                 }
-                if(log.Id!=0)
+                if(log.Level==4)
+                {
+                    Member mem = new Member();
+                    mem = MemberControllerSql.GetByLoginId(log.Id);
+                    Session["Fullname"] = mem.Fname + " " + mem.Mname + " " + mem.Lname;
+                    Session["MemberId"] = mem.Id;
+                    return RedirectToAction("Home", "Member");
+                }
+                else if (log.Level == 3)
                 {
                     return RedirectToAction("Home", "Admin");
                 }

@@ -17,7 +17,10 @@ namespace OWBCS.Controllers
         {
             return View();
         }
-
+        public ActionResult Home()
+        {
+            return View();
+        }
         private string Hash(string p)
         {
             string hash = "";
@@ -35,10 +38,14 @@ namespace OWBCS.Controllers
             Session["status"] = null;
             List<Login> loglist = new List<Login>();
             loglist = LoginControllerSql.GetAll(me.EmailAddress);
-            string aid = day.ToShortDateString() + me.Birthdate.ToShortDateString();
-            aid = aid.Replace("/", "");
+            List<Member> mem = new List<Member>();
+            mem = MemberControllerSql.GetAll();
+            int iid = mem.Count + 1;
+            string memid = "M" + (iid).ToString();
+            string salut = "";
             if (loglist.Count == 0)
-            {             
+            {   
+                
                 string pass = Hash((me.Birthdate.ToShortDateString()));
                 Login log = new Login
                 {
@@ -46,7 +53,7 @@ namespace OWBCS.Controllers
                     Hash = pass,
                     CreatedBy = "none",
                     ModifyBy = "none",
-                    Level = 3,
+                    Level = 4,
                     CreatedDate = day,
                     ModifiedDate = day,
                     Locked = 0,
@@ -56,6 +63,21 @@ namespace OWBCS.Controllers
 
                 if (status == true)
                 {
+                    if(me.Gender=="Male")
+                    {
+                        salut = "Mr";
+                    }
+                    else if(me.Gender=="Female")
+                    {
+                        if(me.MaritalStatus=="Married")
+                        {
+                            salut = "Mrs";
+                        }
+                        else
+                        {
+                            salut = "Ms";
+                        }
+                    }
                     List<Login> ul = LoginControllerSql.GetAll(me.EmailAddress);
                     Member ret = new Member
                     {
@@ -72,10 +94,10 @@ namespace OWBCS.Controllers
                         Gender = me.Gender,
                         ContactNo = me.ContactNo,
                         MaritalStatus = me.MaritalStatus,
-                        EmployeeId = aid,
+                        EmployeeId = memid,
                         EmergencyContactNo = me.EmergencyContactNo,
                         SalaryAmt = me.SalaryAmt,
-                        Salutation = "Mr"
+                        Salutation = salut
                     };
                     status = MemberControllerSql.Insert(ret);
                     Session["status"] = 1;
