@@ -37,6 +37,7 @@ namespace OWBCS.Controllers
                     mem = MemberControllerSql.GetByLoginId(log.Id);
                     Session["Fullname"] = mem.Fname + " " + mem.Mname + " " + mem.Lname;
                     Session["MemberId"] = mem.Id;
+                    Session["MemberId1"] = mem.EmployeeId;
                     return RedirectToAction("Home", "Member");
                 }
                 else if (log.Level == 3)

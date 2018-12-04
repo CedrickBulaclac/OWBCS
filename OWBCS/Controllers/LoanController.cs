@@ -11,9 +11,20 @@ namespace OWBCS.Controllers
         // GET: Loan
         public ActionResult Loan()
         {
-            ViewBag.Id = Convert.ToInt32(Session["MemberId"]);
-            ViewBag.Fullname = Convert.ToString(Session["Fullname"]);
-            return View();
+            string memberid = Convert.ToString(Session["MemberId"]);
+            List<Loan> loanlist = new List<Loan>();
+            loanlist = LoanControllerSql.GetAll(memberid);
+            if (loanlist.Count == 0)
+            {
+                ViewBag.Id = Convert.ToInt32(Session["MemberId"]);
+                ViewBag.Fullname = Convert.ToString(Session["Fullname"]);
+                return View();
+            }
+            else
+            {
+                Session["alert"]="1";
+                return RedirectToAction("Home","Member");
+            }
         }
         [HttpPost]
         public ActionResult Loan(FormCollection fc)
@@ -77,11 +88,19 @@ namespace OWBCS.Controllers
                 {
                     string name = Convert.ToString(fc["co"+i]);
                     string contact = Convert.ToString(fc["cno" + i]);
+                    string MID= Convert.ToString(fc["CMID" + i]);
+                    if(MID=="")
+                    {
+                        MID = "0";
+                    }
+                
+
                     Comaker co = new Comaker
                     {
                         LoanId=lid,
                         Name=name,
-                        ContactNo=contact
+                        ContactNo=contact,
+                        MemberId=MID
                     };
                     status = ComakerControllerSql.Insert(co);
                 }

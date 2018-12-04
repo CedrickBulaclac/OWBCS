@@ -20,8 +20,13 @@
     <br />
     @using (Html.BeginForm("Loan", "Loan", FormMethod.Post))
     {
+
+
+
+
+
         <input type="hidden" name="mid" id="mid" value="@ViewBag.Id" />
-        <input type="hidden" name="no" id="no"/>
+        <input type="hidden" name="no" id="no" />
         <div class="container">
             <h3>Apply Loan</h3>
             <hr />
@@ -161,7 +166,7 @@
                 </center>
                 <hr />
                 <div class="row">
-                    <br />                 
+                    <br />
                     <div id="inputs">
 
                     </div>
@@ -225,10 +230,22 @@
             $('#inputs').append('<br/>');
             if (number != 0) {
                 for (var i = 0; i <= number - 1; i++) {
-                    $('#inputs').append('<div class="row"><div class= "col-lg-6" ><div class="col-lg-4"><label>Full Name: </label></div><div class="col-lg-8"><input type="text" class="form-control" id="co' + i + '" name="co' + i + '" required></div></div><div class="col-lg-6"><div class="col-lg-4"><label>Contact No: </label></div><div class="col-lg-8"><input type="text" class="form-control" id="cno' + i + '" name="cno' + i + '"required></div></div></div>');
+                    $('#inputs').append('<div class="row"><div class= "col-lg-4"><div class="col-lg-4"><label>Full Name: </label></div><div class="col-lg-4"><input type="text" class="form-control" id="co' + i + '" name="co' + i + '" required></div></div><div class="col-lg-4"><div class="col-lg-4"><label>Contact No: </label></div><div class="col-lg-8"><input type="text" class="form-control" id="cno' + i + '" name="cno' + i + '" required></div></div><div class="col-lg-4"><div class="col-lg-4"><input type="checkbox" name="ch' + i + '" id="ch' + i + '" onchange="MID('+ i +')">Member of Cooperative</div><div class="col-lg-8"><b>Member Id:</b> <input type="text" name="CMID'+i+'" id="CMID'+i+'" class="form-control" readonly></div></div></div>');
                 }
             }
-       
+
+        }
+
+        function MID(id) {
+           
+            var checkBox = document.getElementById('ch'+id);
+            if (checkBox.checked == true) {
+                alert(id);
+                document.getElementById("CMID" + id).readOnly = false;
+            }
+            else {
+                document.getElementById("CMID" + id).readOnly = true;
+            }
         }
 
     </script>

@@ -19,7 +19,17 @@ namespace OWBCS.Controllers
         }
         public ActionResult Home()
         {
-            return View();
+            string loanerr = Convert.ToString(Session["alert"]);
+            if (loanerr == "1")
+            {
+                Response.Write("<script type='text/javascript'>alert('Your loan is in process');</script>");
+                Session["alert"] = null;
+                return View();
+            }
+            else
+            {
+                return View();
+            }
         }
         private string Hash(string p)
         {
