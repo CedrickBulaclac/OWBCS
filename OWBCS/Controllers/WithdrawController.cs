@@ -17,18 +17,18 @@ namespace OWBCS.Controllers
             if (with1.Count == 0)
             {
                 decimal totalsavings = 0;
-                List<Contribution> contributions = new List<Contribution>();
-                contributions = ContributionCotrollerSql.GetAll(id);
-                if (contributions.Count > 0)
+                List<Savings> savings = new List<Savings>();
+                savings = SavingsCotrollerSql.GetAll(id);
+                if (savings.Count > 0)
                 {
-                    for (int i = 0; i <= contributions.Count - 1; i++)
+                    for (int i = 0; i <= savings.Count - 1; i++)
                     {
-                        totalsavings += contributions[i].ContributionAmt;
+                        totalsavings += savings[i].SavingsAmt;
                     }
                 }
                 List<Withdraw> with = new List<Withdraw>();
                 with = WithdrawControllerSql.GetAll(id);
-                if (contributions.Count > 0)
+                if (with.Count > 0)
                 {
                     for (int i = 0; i <= with.Count - 1; i++)
                     {

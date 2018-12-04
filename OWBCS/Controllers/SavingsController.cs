@@ -13,21 +13,22 @@ namespace OWBCS.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult Savings(Contribution contribution,FormCollection fc)
+        public ActionResult Savings(Savings contribution,FormCollection fc)
         {
             bool status = false;
-            List<Contribution> contr = new List<Contribution>();
+            List<Savings> contr = new List<Savings>();
+            contr = SavingsCotrollerSql.GetAll();
             int id=contr.Count+1;
             int mid = Convert.ToInt32(fc["MemberId"]);
             string sid = "C" + id.ToString();
-            Contribution model = new Contribution
+            Savings model = new Savings
             {
-                ContributionId = sid,
-                DateContributed = DateTime.Now,
-                ContributionAmt = contribution.ContributionAmt,
+                SavingsId = sid,
+                SavingsDate = DateTime.Now,
+                SavingsAmt = contribution.SavingsAmt,
                 MemberId=mid
             };
-            status = ContributionCotrollerSql.Insert(model);
+            status = SavingsCotrollerSql.Insert(model);
             if(status==true)
             {
                 Response.Write("<script>alert('You have successfully add the savings');</script>");

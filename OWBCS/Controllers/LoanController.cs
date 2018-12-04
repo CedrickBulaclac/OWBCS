@@ -57,7 +57,8 @@ namespace OWBCS.Controllers
                 LoanAmt= loanamt,
                 Terms=terms,
                 InterestRate=1,
-                TotalPaymentwInterest= totalwinterest
+                TotalPaymentwInterest= totalwinterest,
+                ApprovedBy="none"
             };
             status = LoanControllerSql.Insert(loan);
             if(status==true)
@@ -131,12 +132,33 @@ namespace OWBCS.Controllers
                 
         }
 
-            public ActionResult Savings()
+        public ActionResult Savings()
         {
             return View();
         }
-
-
-
+        public ActionResult GetLoan(Loan data)
+        {
+            List<Loan> ret = new List<Loan>();
+            ret = LoanControllerSql.GetStatus(data.Status);
+            return Json(new { data = ret }, JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult Update(Loan data)
+        {
+            string name = Convert.ToString(Session["Fullname"]);
+            bool status = false;
+            Loan loan = new Loan
+            {
+                Id = data.Id,
+                Status = data.Status,
+                ApprovedBy = name,
+                ApprovalDate=DateTime.Now
+            };
+            status = LoanControllerSql.UpdateStatus(loan);
+            return new JsonResult { Data = status, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+        }
+        public ActionResult LoanView()
+        {
+            return View();
+        }
     }
 }

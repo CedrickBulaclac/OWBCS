@@ -1,4 +1,4 @@
-﻿@model OWBCS.Contribution
+﻿@model OWBCS.Savings
 @{
     Layout = "/Views/Layout/LayoutAdmin.cshtml";
 }
@@ -32,10 +32,10 @@
                             <br />
                             <input type="hidden" name="MemberId" id="MemberId"/>
                             <div class="row">
-                                @Html.LabelFor(model => model.ContributionAmt,"Amount:", htmlAttributes: new { @class = "control-label col-md-2" })
+                                @Html.LabelFor(model => model.SavingsAmt, "Amount:", htmlAttributes: new { @class = "control-label col-md-2" })
                                 <div class="col-lg-12">
-                                    @Html.EditorFor(model => model.ContributionAmt, new { htmlAttributes = new { @class = "form-control", @required = "required" } })
-                                    @Html.ValidationMessageFor(model => model.ContributionAmt, "", new { @class = "text-danger" })
+                                    @Html.EditorFor(model => model.SavingsAmt, new { htmlAttributes = new { @class = "form-control", @required = "required" } })
+                                    @Html.ValidationMessageFor(model => model.SavingsAmt, "", new { @class = "text-danger" })
                                 </div>
                             </div>
                         </div>

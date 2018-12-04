@@ -20,6 +20,7 @@ namespace OWBCS
         public decimal TotalPaymentwInterest { get; set; }
         public string SCreatedDate { get; set; }
         public string SApprovalDate { get; set; }
+        public string ApprovedBy { get; set; }
         public Loan CreateObject(SqlDataReader reader)
         {
             Loan ret = new Loan();
@@ -33,6 +34,7 @@ namespace OWBCS
             ret.InterestRate = reader.GetInt32(7);
             ret.Terms = reader.GetInt32(8);
             ret.TotalPaymentwInterest = reader.GetDecimal(9);
+            ret.ApprovedBy = reader.GetString(10);
             return ret;
         }
 
