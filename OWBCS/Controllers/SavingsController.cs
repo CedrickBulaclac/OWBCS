@@ -22,7 +22,7 @@ namespace OWBCS.Controllers
             string sid = "C" + id.ToString();
             Contribution model = new Contribution
             {
-                Id = sid,
+                ContributionId = sid,
                 DateContributed = DateTime.Now,
                 ContributionAmt = contribution.ContributionAmt,
                 MemberId=mid

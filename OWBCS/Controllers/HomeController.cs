@@ -42,6 +42,11 @@ namespace OWBCS.Controllers
                 }
                 else if (log.Level == 3)
                 {
+                    Admin a = new Admin();
+                    a = AdminControllerSql.GetById(log.Id);
+                    Session["Fullname"] = a.Fname + " " + a.Mname + " " + a.Lname;
+                    Session["MemberId"] = a.Id;
+                    Session["MemberId1"] = a.AdminId;
                     return RedirectToAction("Home", "Admin");
                 }
                 else

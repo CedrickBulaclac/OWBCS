@@ -1,0 +1,138 @@
+﻿
+@{
+    Layout = "/Views/Layout/LayoutAdmin.cshtml";
+    string approved = "Approved";
+    string denied = "Disapproved";
+    string pending = "Pending";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>WithdrawalView</title>
+    <link rel="stylesheet" href="~/Content/bootstrap3.3.7.css" />
+    <link rel="stylesheet" href="~/Content/Datatable.css" />
+    <link href="~/Content/themes/base/jquery-ui.min.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="container">
+        <div class="pull-left">
+            <label id="li" name="li"></label>
+        </div>
+        <div class="pull-right">
+            <div class="btn-group">
+
+                <button type="button" class="btn btn-default btn-filter " value="Approved" onclick="Set('@approved')">Approved</button>
+                <button type="button" class="btn btn-default btn-filter " value="Pending" onclick="Set('@pending')">Pending</button>
+                <button type="button" class="btn btn-default btn-filter" value="Denied" onclick="Set('@denied')">Disapproved</button>
+            </div>
+        </div>
+        <br />
+        <br />
+        <div class="table-responsive">
+            <table class="table table-striped" id="withData">
+                <thead>
+                    <tr>
+                        <th>
+                            Member Id
+                        </th>
+                        <th>
+                            Amount
+                        </th>
+                        <th>
+                            Savings
+                        </th>
+                        <th>
+                            Status
+                        </th>
+                        <th>
+                            Approved By
+                        </th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+
+    </div>
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+    <script src="~/Content/moment.js"></script>
+    <script src="~/Content/Datatable.js"></script>
+    <script>
+
+        $(document).ready(function () {
+            var data = {
+                Status:"Pending"
+            };
+            document.getElementById('li').innerHTML = 'List of Pending'
+            var app = "Approved";
+            var decl = "Disapproved";
+            var table = $('#withData').DataTable({
+                "ajax": {
+                    "url": '/Withdraw/GetWithdrawal',
+                    "type": "GET",
+                    "datatype": "json",
+                     "data":data
+                },
+                "columns": [
+                    { "data": "MemberId", "autowidth": true },
+                    { "data": "WithdrawAmt", "autowidth": true, render: function (data) { return '₱' + data.toFixed(2) } },
+                    { "data": "Savings", "autowidth": true, render: function (data) { return '₱'+data.toFixed(2) } },
+                    { "data": "Status", "autowidth": true },
+                    { "data": "ApprovedBy", "autowidth": true },
+                    { "data": "Id", "autowidth": true, render: function (data) { return '<button class="btn btn-success" onclick="Update(' + data + ',\'' + app + '\')"> <i class="glyphicon glyphicon-thumbs-up"></i></button> <button class="btn btn-danger" onclick="Update(' + data + ',\'' + decl +'\')"> <i class="glyphicon glyphicon-thumbs-down"></i></button> ' } }
+                ]
+            });
+        });
+
+
+        function Set(status) {
+            document.getElementById('li').innerHTML='List of '+status
+            
+            var data = {
+                Status: status
+            };
+            var app = "Approved";
+            var decl = "Disapproved";
+            $('#withData').dataTable().fnDestroy();
+            var table = $('#withData').DataTable({
+                "ajax": {
+                    "url": '/Withdraw/GetWithdrawal',
+                    "type": "GET",
+                    "datatype": "json",
+                    "data": data
+                },
+                "columns": [
+                    { "data": "MemberId", "autowidth": true },
+                    { "data": "WithdrawAmt", "autowidth": true, render: function (data) { return '₱' + data.toFixed(2) } },
+                    { "data": "Savings", "autowidth": true, render: function (data) { return '₱' + data.toFixed(2) } },
+                    { "data": "Status", "autowidth": true },
+                    { "data": "ApprovedBy", "autowidth": true },
+                    { "data": "Id", "autowidth": true, render: function (data) { return '<button class="btn btn-success" onclick="Update(' + data + ',\'' + app + '\')"> <i class="glyphicon glyphicon-thumbs-up"></i></button> <button class="btn btn-danger" onclick="Update(' + data + ',\'' + decl + '\')"> <i class="glyphicon glyphicon-thumbs-down"></i></button> ' } }
+                ]
+            });
+        }
+        function Update(id, status) {
+            var data1={
+                Status: status,
+                Id:id
+            };
+                $.ajax({
+                    url: '/Withdraw/Update',
+                    type: 'post',
+                    data: data1,
+                    success: function (data) {
+                        if (data == true) {
+                            alert('Success');
+                            window.location.reload();
+                        }
+                    }
+                });
+            }
+    </script>
+</body>
+</html>

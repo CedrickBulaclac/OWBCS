@@ -28,6 +28,18 @@ namespace OWBCS.Controllers
             }
             else
             {
+                string success = Convert.ToString(Session["Success"]);
+                string success1 = Convert.ToString(Session["withdrawstatus"]);
+                if (success =="1")
+                {
+                    Response.Write("<script type='text/javascript'>alert('Success');</script>");
+                    Session["Success"] = null;
+                }
+                if (success1 == "1")
+                {
+                    Response.Write("<script type='text/javascript'>alert('There is an existing Withdrawal');</script>");
+                    Session["withdrawstatus"] = null;
+                }
                 return View();
             }
         }

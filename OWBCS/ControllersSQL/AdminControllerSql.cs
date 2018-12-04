@@ -26,7 +26,7 @@ namespace OWBCS
         }
         public static Admin GetById(int id)
         {
-            const string GET_ALL = "select Id,LoginId,AdminId,Fname,Mname,Lname,Position,ResidentialAddress,Gender,Birthdate,MaritalStatus,EmailAddress,ContactNo,EmergencyNo,Deleted,Url from tbAdmin  where Id=@Id and Deleted=0";
+            const string GET_ALL = "select Id,LoginId,AdminId,Fname,Mname,Lname,Position,ResidentialAddress,Gender,Birthdate,MaritalStatus,EmailAddress,ContactNo,EmergencyNo,Deleted,Url from tbAdmin  where LoginId=@Id and Deleted=0";
             Admin ret = new Admin();
             SqlCommand cmd = new SqlCommand(GET_ALL);
             cmd.Parameters.Add(new SqlParameter("Id", id));

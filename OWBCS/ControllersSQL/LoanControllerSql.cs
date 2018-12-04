@@ -10,7 +10,7 @@ namespace OWBCS
     {
         public static List<Loan> GetAll()
         {
-            const string GET_ALL = "select Id,MemberId,LoanId,Status,LoanAmt,CreatedDate,ApprovalDate,InterestRate,Terms,TotalPaymentwInterest from tbLoan";
+            const string GET_ALL = "select Id,MemberId,LoanId,Status,LoanAmt,Convert(varchar(11),CreatedDate,100) as CreatedDate,Convert(varchar(11),ApprovalDate,100) as ApprovalDate,InterestRate,Terms,TotalPaymentwInterest from tbLoan";
             List<Loan> ret = new List<Loan>();
             SqlCommand cmd = new SqlCommand(GET_ALL);
             ret = SqlManager.Select<Loan>(cmd);
@@ -18,13 +18,25 @@ namespace OWBCS
         }
         public static List<Loan> GetAll(string id)
         {
-            const string GET_ALL = "select Id,MemberId,LoanId,Status,LoanAmt,CreatedDate,ApprovalDate,InterestRate,Terms,TotalPaymentwInterest from tbLoan where MemberId=@MemberId and Status='Pending'";
+            const string GET_ALL = "select Id,MemberId,LoanId,Status,LoanAmt,Convert(varchar(11),CreatedDate,100) as CreatedDate,Convert(varchar(11),ApprovalDate,100) as ApprovalDate,InterestRate,Terms,TotalPaymentwInterest from tbLoan where MemberId=@MemberId and Status='Pending'";
             List<Loan> ret = new List<Loan>();        
             SqlCommand cmd = new SqlCommand(GET_ALL);
             cmd.Parameters.Add(new SqlParameter("MemberId", id));
             ret = SqlManager.Select<Loan>(cmd);
             return ret;
         }
+
+        public static Loan Get(string id)
+        {
+            const string GET_ALL = "select Id,MemberId,LoanId,Status,LoanAmt,Convert(varchar(11),CreatedDate,100) as CreatedDate,Convert(varchar(11),ApprovalDate,100) as ApprovalDate,InterestRate,Terms,TotalPaymentwInterest from tbLoan where MemberId=@MemberId and Status='Pending'";
+            Loan ret = new Loan();
+            SqlCommand cmd = new SqlCommand(GET_ALL);
+            cmd.Parameters.Add(new SqlParameter("MemberId", id));
+            ret = SqlManager.Select<Loan>(cmd).First();
+            return ret;
+        }
+
+
         public static bool Insert(Loan loan)
         {
             const string insert = "insert [tbLoan] (MemberId,LoanId,Status,LoanAmt,CreatedDate,ApprovalDate,InterestRate,Terms,TotalPaymentwInterest) values (@MemberId ,@LoanId,@Status,@LoanAmt,@CreatedDate,@ApprovalDate,@InterestRate,@Terms,@TotalPaymentwInterest) ";

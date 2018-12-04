@@ -22,16 +22,16 @@ namespace OWBCS.Controllers
             }
             else
             {
-                Session["alert"]="1";
-                return RedirectToAction("Home","Member");
+                Session["alert"] = "1";
+                return RedirectToAction("Home", "Member");
             }
         }
         [HttpPost]
         public ActionResult Loan(FormCollection fc)
         {
             bool status = false;
-            decimal loanamt = Convert.ToDecimal(fc["la"]);
-            int terms = Convert.ToInt32(fc["monthtp"]);
+            decimal loanamt = Convert.ToDecimal(fc["amt"]);
+            int terms = Convert.ToInt32(fc["mtp"]);
             decimal totalwinterest = Convert.ToDecimal(fc["totalwinterest"]);
             int mid= Convert.ToInt32(Session["MemberId"]);
 
@@ -103,14 +103,35 @@ namespace OWBCS.Controllers
                         MemberId=MID
                     };
                     status = ComakerControllerSql.Insert(co);
+                    if(status==true)
+                    {
+                        Session["Success"] = "1";
+                        return RedirectToAction("Home","Member");
+                    }
                 }
             }
             
             return View();
         }
-        
+        public ActionResult ViewLoan()
+        {
+            Loan loan = new Loan();
+            string memberid = Convert.ToString(Session["MemberId"]);
+            List<Loan> loanlist = new List<Loan>();
+            loanlist = LoanControllerSql.GetAll(memberid);
+            if (loanlist.Count == 0)
+            {
+                return View();
+            }
+            else
+            {
+                loan = LoanControllerSql.Get(memberid);
+                return View(loan);
+            }
+                
+        }
 
-        public ActionResult Savings()
+            public ActionResult Savings()
         {
             return View();
         }

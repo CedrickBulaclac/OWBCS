@@ -1,0 +1,95 @@
+﻿@model Withdraw
+@{
+    Layout = "/Views/Layout/LayoutMember.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Withdraw</title>
+    <link rel="stylesheet" href="~/Content/bootstrap3.3.7.css" />
+    <link rel="stylesheet" href="~/Content/Datatable.css" />
+    <link href="~/Content/themes/base/jquery-ui.min.css" rel="stylesheet" />
+</head>
+<body>
+    <br />
+    <br />
+    <h3>Withdraw Information</h3>
+    <hr />
+    <div class="container">
+        <div class="form-group">
+            <div class="col-lg-4">
+                <label>Name:</label>
+            </div>
+            <div class="col-lg-8">
+                <label>@ViewBag.Fullname</label>
+            </div>
+        </div>
+        <br />
+        <br />
+        <div class="form-group">
+            <div class="col-lg-4">
+                <label>Current Balance:</label>
+            </div>
+            <div class="col-lg-8">
+                <input type="text" class="form-control" value="@ViewBag.Total" id="ts" name="ts" readonly />
+            </div>
+        </div>
+        <br />
+        <br />
+        <div class="form-group">
+            <div class="col-lg-4">
+                <label class="control-label col-md-2">Withdraw Amount:</label>
+            </div>
+            <div class="col-lg-8">
+                <input type="number" class="form-control" id="amt" name="amt" />
+            </div>
+        </div>
+        <div class="pull-right">
+            <button type="submit" class="btn btn-primary" onclick="Check()">Submit</button>
+        </div>
+    </div>
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+    <script>
+        function Check() {
+            var ts = document.getElementById('ts').value;
+            var amt = document.getElementById('amt').value;
+            if (amt > ts) {
+                alert('Not enough balance');
+            }
+            else {
+                var tots = ts - amt;
+                if (tots == 0) {
+                    alert('The maintaining balance should be ₱1,000.00');
+                }
+                else {
+                    var data1= {
+                        WithdrawAmt:amt
+                    };                  
+                    $.ajax({
+                        url: '/Withdraw/Withdrawal',
+                        type: 'POST',
+                        data: data1,
+                        success: function (data) {
+                            if (data == true) {
+                                alert('Success');
+                                window.location.href="/Member/Home";
+                            }
+                            else {
+                                alert('err');
+                            }
+
+                        }
+                    });
+                }
+            }
+
+
+        }
+    </script>
+</body>
+</html>

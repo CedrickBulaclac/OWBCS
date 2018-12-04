@@ -10,15 +10,24 @@ namespace OWBCS
     {
         public static List<Contribution> GetAll()
         {
-            const string GET_ALL = "select Id,MemberId,DateContributed,ContributionAmt from tbContribution";
+            const string GET_ALL = "select Id,MemberId,DateContributed,ContributionAmt,ContributionId from tbContribution";
             List<Contribution> ret = new List<Contribution>();
             SqlCommand cmd = new SqlCommand(GET_ALL);
             ret = SqlManager.Select<Contribution>(cmd);
             return ret;
         }
+        public static List<Contribution> GetAll(int id)
+        {
+            const string GET_ALL = "select Id,MemberId,DateContributed,ContributionAmt,ContributionId from tbContribution where MemberId=@MemberId ";
+            List<Contribution> ret = new List<Contribution>();
+            SqlCommand cmd = new SqlCommand(GET_ALL);
+            cmd.Parameters.Add(new SqlParameter("MemberId", id));
+            ret = SqlManager.Select<Contribution>(cmd);
+            return ret;
+        }
         public static Contribution GetById(int id)
         {
-            const string GET_ALL = "select Id,MemberId,DateContributed,ContributionAmt from tbContribution where Id=@Id";
+            const string GET_ALL = "select Id,MemberId,DateContributed,ContributionAmt,ContributionId from tbContribution where Id=@Id";
             Contribution ret = new Contribution();
             SqlCommand cmd = new SqlCommand(GET_ALL);
             cmd.Parameters.Add(new SqlParameter("Id", id));
@@ -27,12 +36,13 @@ namespace OWBCS
         }
         public static bool Insert(Contribution contribution)
         {
-            const string insert = "insert [tbContribution] (Id,MemberId,DateContributed,ContributionAmt) values (@Id,@MemberId,@DateContributed,@ContributionAmt) ";
+            const string insert = "insert [tbContribution] (MemberId,DateContributed,ContributionAmt,ContributionId) values (@MemberId,@DateContributed,@ContributionAmt,@ContributionId) ";
             SqlCommand ret = new SqlCommand(insert);
             ret.Parameters.Add(new SqlParameter("Id", contribution.Id));
             ret.Parameters.Add(new SqlParameter("MemberId", contribution.MemberId));
             ret.Parameters.Add(new SqlParameter("DateContributed", contribution.DateContributed));
             ret.Parameters.Add(new SqlParameter("ContributionAmt", contribution.ContributionAmt));
+            ret.Parameters.Add(new SqlParameter("ContributionId", contribution.ContributionId));
             return SqlManager.ExecuteNonQuery(ret);
         }
 

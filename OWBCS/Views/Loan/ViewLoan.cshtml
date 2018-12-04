@@ -1,0 +1,78 @@
+﻿@model OWBCS.Loan
+
+@{
+    Layout = "/Views/Layout/LayoutMember.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>ViewLoan</title>
+</head>
+<body>
+    <div>
+        <h4>Loan</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.MemberId)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.MemberId)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Status)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Status)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.LoanAmt)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.LoanAmt)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.CreatedDate)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.SCreatedDate)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.InterestRate)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.InterestRate)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Terms)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Terms)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.TotalPaymentwInterest)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.TotalPaymentwInterest)
+            </dd>
+    
+        </dl>
+    </div>
+</body>
+</html>
