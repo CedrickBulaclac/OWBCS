@@ -18,7 +18,9 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <style>
         body {
-            background-image: url('/Content/Images/adminHomeBG.jpg');
+            background-image: url('/Content/Images/2397.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
         }
 
         /*.demo-layout-transparent {
@@ -35,15 +37,14 @@
 </head>
 <body>
     <header>
-        <div class="container">
+        <div class="container" >
             <div id="branding">
-                <h1><span class="highlight">RestauRate</span></h1>
+                <h1><span class="highlight">Online Web-Based Cooperative System</span></h1>
             </div>
             <nav>
                 <ul>
 
-                    <li><a href="@Url.Action("Home","Home")">Home</a></li>
-                    <li><a href="@Url.Action("About","Home")">About Us</a></li>             
+                    <li><a href="@Url.Action("Home","Home")">Home</a></li>          
                     <li><a href="@Url.Action("Index","Home")">Login</a></li>
                 </ul>
             </nav>
@@ -55,9 +56,7 @@
     <br />
     <br />
     <br />
-    <footer>
-        <p>RestauRate, Copyright &copy; @DateTime.Now.Year</p>
-    </footer>
+   
     @*@Scripts.Render("~/bundles/jquery")*@
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)

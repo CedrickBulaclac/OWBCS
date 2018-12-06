@@ -16,9 +16,10 @@ namespace OWBCS
             ret = SqlManager.Select<Loan>(cmd);
             return ret;
         }
+
         public static List<Loan> GetAll(string id)
         {
-            const string GET_ALL = "select Id,MemberId,LoanId,Status,LoanAmt,Convert(varchar(11),CreatedDate,100) as CreatedDate,Convert(varchar(11),ApprovalDate,100) as ApprovalDate,InterestRate,Terms,TotalPaymentwInterest,ApprovedBy from tbLoan where MemberId=@MemberId and Status='Pending'";
+            const string GET_ALL = "select l.Id,l.MemberId,l.LoanId,l.Status,LoanAmt,Convert(varchar(11),CreatedDate,100) as CreatedDate,Convert(varchar(11),ApprovalDate,100) as ApprovalDate,InterestRate,Terms,TotalPaymentwInterest,ApprovedBy from tbLoan l inner join tbComaker c on l.LoanId=c.LoanId where c.MemberId=@MemberId and c.Status='Pending'";
             List<Loan> ret = new List<Loan>();        
             SqlCommand cmd = new SqlCommand(GET_ALL);
             cmd.Parameters.Add(new SqlParameter("MemberId", id));
@@ -43,15 +44,24 @@ namespace OWBCS
             ret = SqlManager.Select<Loan>(cmd).First();
             return ret;
         }
+        public static Loan Get(int id)
+        {
+            const string GET_ALL = "select Id,MemberId,LoanId,Status,LoanAmt,Convert(varchar(11),CreatedDate,100) as CreatedDate,Convert(varchar(11),ApprovalDate,100) as ApprovalDate,InterestRate,Terms,TotalPaymentwInterest,ApprovedBy from tbLoan where Id=@Id and Status='Pending'";
+            Loan ret = new Loan();
+            SqlCommand cmd = new SqlCommand(GET_ALL);
+            cmd.Parameters.Add(new SqlParameter("Id", id));
+            ret = SqlManager.Select<Loan>(cmd).First();
+            return ret;
+        }
         public static bool UpdateStatus(Loan loan)
         {
 
-            const string insert = "update tbLoan set Status=@Status, ApprovedBy=@ApprovedBy, ApprovedDate=@ApprovedDate  where Id=@Id";
+            const string insert = "update tbLoan set Status=@Status, ApprovedBy=@ApprovedBy, ApprovalDate=@ApprovedDate  where Id=@Id";
             SqlCommand ret = new SqlCommand(insert);
             ret.Parameters.Add(new SqlParameter("Id", loan.Id));
             ret.Parameters.Add(new SqlParameter("Status", loan.Status));
             ret.Parameters.Add(new SqlParameter("ApprovedBy", loan.ApprovedBy));
-            ret.Parameters.Add(new SqlParameter("ApprovedDate", loan.ApprovedBy));
+            ret.Parameters.Add(new SqlParameter("ApprovedDate", loan.ApprovalDate));
             return SqlManager.ExecuteNonQuery(ret);
         }
 

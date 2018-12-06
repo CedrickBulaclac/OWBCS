@@ -13,7 +13,9 @@ namespace OWBCS
         public DateTime SavingsDate { get; set; }
         public decimal SavingsAmt { get; set; }
         public string SavingsId { get; set; }
-
+        public string FormattedDate => SavingsDate.ToShortDateString();
+        public string CreatedBy { get; set; }
+        public int Deleted { get; set; }
         public Savings CreateObject(SqlDataReader reader)
         {
             Savings ret = new Savings();
@@ -22,6 +24,7 @@ namespace OWBCS
             ret.SavingsDate = reader.GetDateTime(2);
             ret.SavingsAmt = reader.GetDecimal(3);
             ret.SavingsId = reader.GetString(4);
+            ret.CreatedBy = reader.GetString(5);
             return ret;
         }
 

@@ -17,6 +17,10 @@ namespace OWBCS.Controllers
         {
             return View();
         }
+        public ActionResult Comaker()
+        {
+            return View();
+        }
         public ActionResult Home()
         {
             string loanerr = Convert.ToString(Session["alert"]);
@@ -30,6 +34,12 @@ namespace OWBCS.Controllers
             {
                 string success = Convert.ToString(Session["Success"]);
                 string success1 = Convert.ToString(Session["withdrawstatus"]);
+                string alert1 = Convert.ToString(Session["alert1"]);
+                if(alert1=="1")
+                {
+                    Response.Write("<script type='text/javascript'>alert('Savings should be greater than or equal to ₱15,000');</script>");
+                    Session["alert1"] = null;
+                }
                 if (success =="1")
                 {
                     Response.Write("<script type='text/javascript'>alert('Success');</script>");
@@ -207,6 +217,14 @@ namespace OWBCS.Controllers
             status = MemberControllerSql.Delete(ret);
             Session["DeleteStatus"] = status;
             return RedirectToAction("MemberView", "Member", new { id = "" });
+        }
+
+
+        public JsonResult ListMember(Member data)
+        {
+            Member data1 = new Member();
+            data1 = MemberControllerSql.GetEmpId(data.EmployeeId);
+            return new JsonResult { Data = data1, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
         }
     }
 }

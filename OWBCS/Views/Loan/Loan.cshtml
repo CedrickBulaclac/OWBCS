@@ -3,8 +3,6 @@
     Layout = "/Views/Layout/LayoutMember.cshtml";
 }
 <html>
-
-
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
@@ -20,12 +18,13 @@
     <br />
     @using (Html.BeginForm("Loan", "Loan", FormMethod.Post))
     {
-
+        <br>
+        <br>
+        <br>
         <input type="hidden" name="mid" id="mid" value="@ViewBag.Id" />
         <input type="hidden" name="no" id="no" />
-        <input type="hidden" name="amt" id="amt" />
         <input type="hidden" name="mtp" id="mtp" />
-        <div class="container">
+       
             <h3>Apply Loan</h3>
             <hr />
             <div class="container">
@@ -50,6 +49,7 @@
                         <select class="form-control" id="la" onchange="Compute()">
                             <option value="15000">₱15,000</option>
                         </select>
+                        <input type="hidden" name="amt" id="amt" />
                     </div>
                 </div>
                 <br />
@@ -94,7 +94,21 @@
                         <input type="text" class="form-control" id="totalmpayment" name="totalmpayment" readonly>
                     </div>
                 </div>
+            </div>
+            <div class="container">
+                <center>
+                    <h4>Co-Maker</h4>
 
+                    <hr />
+                    <div class="row">
+                        <br />
+                        <div id="inputs">
+
+                        </div>
+
+
+                    </div>
+                </center>
             </div>
             <div class="container">
                 <center>
@@ -102,7 +116,7 @@
                 </center>
                 <hr />
                 <div class="row">
-                    <div class="col-lg-6">
+                    <div class="col-lg-4">
                         <div class="col-lg-4">
                             <label>Full Name: </label>
                         </div>
@@ -110,18 +124,7 @@
                             <input type="text" class="form-control" id="witness1" name="witness1" required>
                         </div>
                     </div>
-                    <div class="col-lg-6">
-                        <div class="col-lg-4">
-                            <label>Contact No: </label>
-                        </div>
-                        <div class="col-lg-8">
-                            <input type="text" class="form-control" id="witnesscno1" name="witnesscno1" required>
-                        </div>
-                    </div>
-                </div>
-                <br />
-                <div class="row">
-                    <div class="col-lg-6">
+                    <div class="col-lg-4">
                         <div class="col-lg-4">
                             <label>Full Name: </label>
                         </div>
@@ -129,18 +132,7 @@
                             <input type="text" class="form-control" id="witness2" name="witness2" required>
                         </div>
                     </div>
-                    <div class="col-lg-6">
-                        <div class="col-lg-4">
-                            <label>Contact No: </label>
-                        </div>
-                        <div class="col-lg-8">
-                            <input type="text" class="form-control" id="witnesscno2" name="witnesscno2" required>
-                        </div>
-                    </div>
-                </div>
-                <br />
-                <div class="row">
-                    <div class="col-lg-6">
+                    <div class="col-lg-4">
                         <div class="col-lg-4">
                             <label>Full Name: </label>
                         </div>
@@ -148,37 +140,16 @@
                             <input type="text" class="form-control" id="witness3" name="witness3" required>
                         </div>
                     </div>
-                    <div class="col-lg-6">
-                        <div class="col-lg-4">
-                            <label>Contact No: </label>
-                        </div>
-                        <div class="col-lg-8">
-                            <input type="text" class="form-control" id="witnesscno3" name="witnesscno3" required>
-                        </div>
-                    </div>
                 </div>
-            </div>
-            <div class="container">
-                <center>
-                    <h4>Co-Maker</h4>
-                </center>
-                <hr />
-                <div class="row">
-                    <br />
-                    <div id="inputs">
-
-                    </div>
-
-
-                </div>
-
+                <br />              
             </div>
             <br />
             <div class="pull-right">
                 <button type="submit" class="btn btn-primary">Apply Loan</button>
             </div>
-        </div>
+
     }
+   
     <script src="~/Scripts/jquery-3.3.1.min.js"></script>
     <script src="~/Scripts/jquery.validate.min.js"></script>
     <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
@@ -186,6 +157,9 @@
         var number = 0;
         var com = [null];
         var con = [null];
+        var list =@Html.Raw(Json.Encode(ViewBag.Members));
+        var colist = [null];
+        var old;
         function Compute() {
             var monthtp = 0.0;
             var sinterest = 0.0;
@@ -196,8 +170,7 @@
             var total = 0.0;
             var ltotal = 0.0;
 
-            var nco = 0.0;
-
+            var nco = 0.0;            
             monthtp = parseInt(document.getElementById('monthtp').value);
             if (monthtp != 0) {
                 loan = parseFloat(document.getElementById('la').value).toFixed(2);
@@ -223,31 +196,68 @@
             }
             document.getElementById('totalwinterest').value = parseFloat(monthinterest).toFixed(2);
             document.getElementById('totalmpayment').value = parseFloat(monthtotal).toFixed(2);
+
+            var d = document.getElementById('CMID' + 0).value;         
+            var data = {
+                EmployeeId: d
+            };            
+            $.ajax({
+                "url": "/Member/ListMember",
+                "type": "GET",
+                "data": data,
+                "success": function (data) {
+                    for (var i = 0; i <= number - 1; i++) {
+                        var name = data.Fname + ' ' + data.Mname + ' ' + data.Lname;
+                        document.getElementById("co" + i).value = name;
+                        document.getElementById("cno" + i).value = data.ContactNo;
+                    }
+                }
+            })
         }
 
+    $("form").submit(function (e) {
+       
+
+       
+    });
         function AddInput() {
             $('#inputs').empty();
             $('#inputs').append('<br/>');
             if (number != 0) {
                 for (var i = 0; i <= number - 1; i++) {
-                    $('#inputs').append('<div class="row"><div class= "col-lg-4"><div class="col-lg-4"><label>Full Name: </label></div><div class="col-lg-4"><input type="text" class="form-control" id="co' + i + '" name="co' + i + '" required></div></div><div class="col-lg-4"><div class="col-lg-4"><label>Contact No: </label></div><div class="col-lg-8"><input type="text" class="form-control" id="cno' + i + '" name="cno' + i + '" required></div></div><div class="col-lg-4"><div class="col-lg-4"><input type="checkbox" name="ch' + i + '" id="ch' + i + '" onchange="MID(' + i + ')">Member of Cooperative</div><div class="col-lg-8"><b>Member Id:</b> <input type="text" name="CMID' + i + '" id="CMID' + i + '" class="form-control" readonly></div></div></div>');
+                    $('#inputs').append('<div class="row"><div class="col-lg-4"><label>Member Id </label></div><div class="col-lg-4"><label>Full Name </label></div><div class="col-lg-4"><label>Contact No </label></div></div><div class="row"><div class="col-lg-4"><select onchange="Try('+i+')" name="CMID' + i + '" id="CMID' + i + '" class="form-control"></select></div> <div class="col-lg-4"><input type="text" class="form-control" id="co' + i + '" name="co' + i + '" readonly></div><div class="col-lg-4"><input type="text" class="form-control" id="cno' + i + '" name="cno' + i + '" readonly></div></div>');
+                    for (var ii = 0; ii <= list.length - 1; ii++) {       
+                        $('#CMID' + i).append('<option value="' + list[ii].EmployeeId + '">' + list[ii].EmployeeId+'</option>')
+                    }
                 }
             }
-
         }
 
         function MID(id) {
-
             var checkBox = document.getElementById('ch' + id);
             if (checkBox.checked == true) {
-                alert(id);
                 document.getElementById("CMID" + id).readOnly = false;
             }
             else {
                 document.getElementById("CMID" + id).readOnly = true;
             }
         }
-
+        function Try(id) {
+            var d = document.getElementById('CMID' + id).value;          
+            var data = {
+                EmployeeId: d
+            };          
+            $.ajax({
+                "url": "/Member/ListMember",
+                "type": "GET",
+                "data": data,
+                "success": function (data) {
+                    var name = data.Fname + ' ' + data.Mname + ' ' + data.Lname;
+                    document.getElementById("co" + id).value = name;
+                    document.getElementById("cno" + id).value = data.ContactNo;
+                }
+            })
+        }      
     </script>
 
 </body>

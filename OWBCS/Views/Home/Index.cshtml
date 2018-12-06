@@ -25,26 +25,25 @@
 
         <div class="login_container">
             <div class="form_content">
-                <h2>What is RestauRate?</h2>
-                <p>
-                    Phasellus interdum turpis a sapien iaculis, in mattis diam lacinia.
-                    Morbi ultricies efficitur feugiat.
-                </p>
-                <a href="#">Read More</a>
+                <img src="~/Content/Images/Logo.png" height="300px" />
+               
+                
             </div>
             <div class="login_form">
-                <h1>Sign In</h1>
+                <br />
+                <br />
+                <br />
+                <br />
+
                 @using (Html.BeginForm("Index", "Home", FormMethod.Post))
                 {
                     <input type="email" name="username" placeholder="Email" id="username">
                     <input type="password" name="password" placeholder="Password" id="password">
-                    <button onclick="login()" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored">
-                        <i class="material-icons">input</i>
+                    <button onclick="login()" class="btn btn-primary">
+                        <i class="glyphicon glyphicon-log-in"> Login</i>
                     </button>
-
-                    <a href="#">Forget Password</a>
                 }
-                </div>
+            </div>
 
         </div>
 

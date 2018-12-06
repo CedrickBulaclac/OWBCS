@@ -26,21 +26,45 @@
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <center>
+                                <h2 style="font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif">Savings</h2>
+                            </center>
                         </div>
                         <div class="modal-body">
                             <br />
                             <input type="hidden" name="MemberId" id="MemberId"/>
                             <div class="row">
-                                @Html.LabelFor(model => model.SavingsAmt, "Amount:", htmlAttributes: new { @class = "control-label col-md-2" })
-                                <div class="col-lg-12">
-                                    @Html.EditorFor(model => model.SavingsAmt, new { htmlAttributes = new { @class = "form-control", @required = "required" } })
-                                    @Html.ValidationMessageFor(model => model.SavingsAmt, "", new { @class = "text-danger" })
+                                <div class="col-lg-6">
+                                    <b>Amount :</b>    @Html.EditorFor(model => model.SavingsAmt, new { htmlAttributes = new { @class = "form-control", @required = "required" } })
                                 </div>
+                                <div class="col-lg-6">
+                                    <button type="submit" class="btn btn-success" id="btnAdd" name="btnAdd" onclick="Insert()">Add Savings</button>
+                                </div>                       
+                            </div>
+                            <div class="row">
+                               <div class="table-responsive">
+                                          <table id="savingshistory" class="table table-striped">
+                                              <thead>
+                                                  <tr>
+                                                      <th>
+                                                          Date
+                                                      </th>
+                                                      <th>
+                                                          Amount
+                                                      </th>
+                                                      <th>
+                                                          Created by
+                                                      </th>
+                                                      <th>
+                                                          Actions
+                                                      </th>
+                                                  </tr>
+                                              </thead>
+                                          </table>
+                               </div>
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="submit" class="btn btn-success" id="btnAdd" name="btnAdd" onclick="Insert()">Add Savings</button>
                             <button type="button" class="btn btn-danger" id="btnClose" name="btnClose" data-dismiss="modal">Close</button>
                         </div>
                     </div>
@@ -95,10 +119,47 @@
                     { "data": "Id", "autowidth": true, render: function (data) { return '<button class="btn btn-default" onclick="AddSavings(' + data + ')"><i class="glyphicon glyphicon-plus"></i></button>' } }
                 ]
             });
+            var id = document.getElementById('MemberId').value; console.log(id);
+           
+            
         });
         function AddSavings(id) {
             $('#AddSavings').modal();
             document.getElementById('MemberId').value = id;
+            var data = {
+                MemberId: id
+            };
+            var table1 = $('#savingshistory').DataTable({
+
+                "ajax": {
+                    "url": '/Savings/SavingsAdmin',
+                    "type": "GET",
+                    "datatype": "json",
+                    "data": data
+                },
+                "columns": [
+                    { "data": "SavingsDate", render: function (data, type, announcement) { return announcement.FormattedDate }, "autowidth": true },
+                    { "data": "SavingsAmt", "autowidth": true, render: function (data) { return '₱' + data } },
+                    { "data": "CreatedBy", "autowidth": true },
+                    { "data": "Id", "autowidth": true, render: function (data) { return '<button class="btn btn-default" onclick="Delete(' + data + ')"><i class="glyphicon glyphicon-trash"></i></button>' } }
+                ]
+            });
+        }
+        function Delete(id) {
+            var data = {
+                Id: id
+            };
+            $.ajax({
+                "url": "/Savings/Delete",
+                "type": "POST",
+                "data": data,
+                "success": function (data) {
+                    if (data == true) {
+                        alert('Successfully Deleted');
+                        window.location.reload();
+                    }
+                }
+            });
         }
     </script>
 </body>

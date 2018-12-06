@@ -13,6 +13,7 @@ namespace OWBCS
         public string Name { get; set; }
         public string ContactNo { get; set; }
         public string MemberId { get; set; }
+        public string Status { get; set; }
         public Comaker CreateObject(SqlDataReader reader)
         {
             Comaker ret = new Comaker();
@@ -21,6 +22,7 @@ namespace OWBCS
             ret.Name = reader.GetString(2);
             ret.ContactNo = reader.GetString(3);
             ret.MemberId = reader.GetString(4);
+            ret.Status = reader.GetString(5);
             return ret;
         }
 

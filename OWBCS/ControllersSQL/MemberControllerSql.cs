@@ -16,6 +16,33 @@ namespace OWBCS
             ret = SqlManager.Select<Member>(cmd);
             return ret;
         }
+        public static List<Member> GetAll(int id)
+        {
+            const string GET_ALL = "select Id,LoginId,EmployeeId,Salutation,Fname,Mname,Lname,Position,ResidentialAddress,Gender,Birthdate,MaritalStatus,EmailAddress,ContactNo,EmergencyContactNo,SalaryAmt,Deleted,Url from tbMember where Deleted=0 and Id!=@Id";
+            List<Member> ret = new List<Member>();
+            SqlCommand cmd = new SqlCommand(GET_ALL);
+            cmd.Parameters.Add(new SqlParameter("Id", id));
+            ret = SqlManager.Select<Member>(cmd);
+            return ret;
+        }
+        public static List<Member> Get(string id)
+        {
+            const string GET_ALL = "select Id,LoginId,EmployeeId,Salutation,Fname,Mname,Lname,Position,ResidentialAddress,Gender,Birthdate,MaritalStatus,EmailAddress,ContactNo,EmergencyContactNo,SalaryAmt,Deleted,Url from tbMember where Deleted=0 and EmployeeId=@Id";
+            List<Member> ret = new List<Member>();
+            SqlCommand cmd = new SqlCommand(GET_ALL);
+            cmd.Parameters.Add(new SqlParameter("Id", id));
+            ret = SqlManager.Select<Member>(cmd);
+            return ret;
+        }
+        public static Member GetEmpId(string id)
+        {
+            const string GET_ALL = "select Id,LoginId,EmployeeId,Salutation,Fname,Mname,Lname,Position,ResidentialAddress,Gender,Birthdate,MaritalStatus,EmailAddress,ContactNo,EmergencyContactNo,SalaryAmt,Deleted,Url from tbMember where Deleted=0 and EmployeeId=@Id";
+            Member ret = new Member();
+            SqlCommand cmd = new SqlCommand(GET_ALL);
+            cmd.Parameters.Add(new SqlParameter("Id", id));
+            ret = SqlManager.Select<Member>(cmd).First();
+            return ret;
+        }
         public static Member GetById(int id)
         {
             const string GET_ALL = "select Id,LoginId,EmployeeId,Salutation,Fname,Mname,Lname,Position,ResidentialAddress,Gender,Birthdate,MaritalStatus,EmailAddress,ContactNo,EmergencyContactNo,SalaryAmt,Deleted,Url from tbMember where Id=@Id and Deleted=0";

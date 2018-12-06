@@ -1,0 +1,94 @@
+﻿
+@{
+    Layout = "/Views/Layout/LayoutMember.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Comaker</title>
+    <link rel="stylesheet" href="~/Content/bootstrap3.3.7.css" />
+    <link rel="stylesheet" href="~/Content/Datatable.css" />
+    <link href="~/Content/themes/base/jquery-ui.min.css" rel="stylesheet" />
+</head>
+<body>
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <div class="container">
+        <table class="table table-striped" id="comake">
+            <thead>
+                <tr>
+                    <th>
+                        Loan Id
+                    </th>
+                    <th>
+                        Loan Amount
+                    </th>
+                    <th>
+                        Terms
+                    </th>
+
+                    <th>
+                        Status
+                    </th>
+                    <th>
+                        Actions
+                    </th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+
+
+
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+    <script src="~/Content/moment.js"></script>
+    <script src="~/Content/Datatable.js"></script>
+    <script>
+        var app = "Approved";
+        var decl = "Disapproved";
+        $(document).ready(function () {
+
+            var table = $('#comake').DataTable({
+                "ajax": {
+                    "url": '/Loan/Loaning',
+                    "type": "GET",
+                    "datatype": "json",
+                },
+                "columns": [
+                    { "data": "LoanId", "autowidth": true },
+                    { "data": "LoanAmt", "autowidth": true, render: function (data) { return '₱' + data.toFixed(2) } },
+                    { "data": "Terms", "autowidth": true, render: function (data) { return data + ' months' } },
+                    { "data": "Status", "autowidth": true },
+                    { "data": "Id", "autowidth": true, render: function (data) { return '<button class="btn btn-success" onclick="Update(' + data + ',\'' + app + '\')"> <i class="glyphicon glyphicon-thumbs-up"></i></button> <button class="btn btn-danger" onclick="Update(' + data + ',\'' + decl + '\')"> <i class="glyphicon glyphicon-thumbs-down"></i></button> ' } }                ]
+            });
+        });
+       
+        function Update(id,status) {
+            var data = {
+                Id:id,
+                Status:status
+            }
+            $.ajax({
+                "url": "/Loan/UpdateApprove",
+                "type": "POST",
+                "data": data,
+                "success": function (data) {
+                    if (data == true) {
+                        alert("You have approved as a Comaker of the Loan");
+                        window.location.reload();
+                    }
+                }
+            });
+        }
+    </script>
+</body>
+</html>

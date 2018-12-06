@@ -10,69 +10,153 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>ViewLoan</title>
+    <link rel="stylesheet" href="~/Content/bootstrap3.3.7.css" />
+    <link rel="stylesheet" href="~/Content/Datatable.css" />
+    <link href="~/Content/themes/base/jquery-ui.min.css" rel="stylesheet" />
 </head>
 <body>
+    <br />
+    <br />
+    <br />
+    <br />
     <div>
-        <h4>Loan</h4>
+        <h3>My Loan</h3>
         <hr />
-        <dl class="dl-horizontal">
-            <dt>
-                @Html.DisplayNameFor(model => model.MemberId)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.MemberId)
-            </dd>
+        <input type="hidden" value="@Model.LoanId" id="lid" name="lid" />
+        <dt>
+            @Html.LabelFor(model => model.LoanId, "Loan Id: ") &nbsp; @Html.DisplayFor(model => model.LoanId)
+        </dt>
 
-            <dt>
-                @Html.DisplayNameFor(model => model.Status)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.Status)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.LoanAmt)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.LoanAmt)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.CreatedDate)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.SCreatedDate)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.InterestRate)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.InterestRate)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.Terms)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.Terms)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.TotalPaymentwInterest)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.TotalPaymentwInterest)
-            </dd>
-    
-        </dl>
+        <dt>
+            @Html.LabelFor(model => model.MemberId, "Member Id: ") &nbsp; @Html.DisplayFor(model => model.MemberId)
+        </dt>
+
+        <dt>
+            @Html.LabelFor(model => model.Status, "Status: ") &nbsp; @Html.DisplayFor(model => model.Status)
+        </dt>
+
+        <dt>
+            @Html.LabelFor(model => model.LoanAmt, "Loan Amount: ") &nbsp; ₱ @Html.DisplayFor(model => model.LoanAmt)
+        </dt>
+
+
+        <dt>
+            @Html.LabelFor(model => model.CreatedDate, "Created Date: ") &nbsp;  @Html.DisplayFor(model => model.SCreatedDate)
+        </dt>
+
+        <dt>
+            @Html.LabelFor(model => model.InterestRate, "Interest Rate: ")  &nbsp; @Html.DisplayFor(model => model.InterestRate)%
+        </dt>
+
+        <dt>
+            @Html.LabelFor(model => model.Terms, "Terms: ") &nbsp;  @Html.DisplayFor(model => model.Terms) months
+        </dt>
+
+        <dt>
+            @Html.LabelFor(model => model.TotalPaymentwInterest, "Total Payment with Interest: ") &nbsp; ₱ @Html.DisplayFor(model => model.TotalPaymentwInterest)
+        </dt>
+
+        <div class="row">
+            <div class="col-lg-6">
+                <center><h4>Witness</h4></center>
+                <div class="table-responsive">
+                    <table id="witnesss" class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>
+                                    Witness Name
+                                </th>
+                                <th>
+                                    Contact Number
+                                </th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <center><h4>Co-Maker</h4></center>
+                <div class="table-responsive">
+                    <table id="comaker" class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>
+                                    Member Id
+                                </th>
+                                <th>
+                                    CoMaker Name
+                                </th>
+                                <th>
+                                    Contact Number
+                                </th>
+                                <th>
+                                   Status
+                                </th>
+                                <th>
+                                    Actions
+                                </th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+        </div>
+       
+        <button class="btn btn-default" onclick="Download()">Download</button>
+      
     </div>
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+    <script src="~/Content/moment.js"></script>
+    <script src="~/Content/Datatable.js"></script>
+    <script>
+        $(document).ready(function () {
+            var id = document.getElementById('lid').value;
+            var data = {
+                LoanId: id
+            };
+            var table = $('#witnesss').DataTable({
+                
+                "ajax": {
+                    "url": '/Loan/GetWitness',
+                    "type": "GET",
+                    "datatype": "json",
+                    "data": data
+                },
+                "columns": [
+                    { "data": "WitnessName", "autowidth": true },
+                    { "data": "ContactNo", "autowidth": true },
+                ],
+                "bPaginate": false,
+                "bFilter": false 
+            });
+            var table1 = $('#comaker').DataTable({
+
+                "ajax": {
+                    "url": '/Loan/GetComaker',
+                    "type": "GET",
+                    "datatype": "json",
+                    "data": data
+                },
+                "columns": [
+                    { "data": "MemberId", "autowidth": true },
+                    { "data": "Name", "autowidth": true },
+                    { "data": "ContactNo", "autowidth": true },
+                    { "data": "Status", "autowidth": true },
+                    { "data": "Id", "autowidth": true, render: function (data) { return '<button class="btn btn-danger" ><i class="glyphicon glyphicon-trash"></i></button>' } }
+                ],
+                "bPaginate": false,
+                "bFilter": false
+            });
+            if (modalvalue == 1) {
+                $('#UpdateModal').modal();
+            }
+        });
+        function Download() {
+            $.post("/Loan/Download");
+        }
+
+    </script>
 </body>
 </html>
